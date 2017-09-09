@@ -130,9 +130,9 @@ extract () {
 # todo make function and completion
 # todo make vars for config files
 # todo unbind commands from tty
-alias conf-zsh="$EDITOR $HOME/.zshrc"
-alias conf-i3="$EDITOR $HOME/.config/i3/config"
-alias conf-polybar="$EDITOR $HOME/.config/polybar/config"
+alias conf-zsh="$EDITOR ~/.zshrc"
+alias conf-i3="$EDITOR ~/.config/i3/config"
+alias conf-polybar="$EDITOR ~/.config/polybar/config"
 
 alias conf-grub="~/src/github/dotfiles/config.py grub"
 alias conf-install="~/src/github/dotfiles/config.py install"
@@ -141,4 +141,4 @@ alias cp="rsync -ah --partial --inplace --info=progress2"
 
 export DEFAULT_USER="s3v3r"
 
-source $HOME/.cargo/env
+source ~/.cargo/env
