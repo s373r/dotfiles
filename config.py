@@ -6,6 +6,7 @@ import os
 import shutil
 
 
+# todo make install by symlinks, not copying config files
 parser = argparse.ArgumentParser()
 parser.add_argument('action',
                     choices=['grub', 'install'],
