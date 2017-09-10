@@ -72,7 +72,7 @@ tray-padding = 2
 
 [module/xwindow]
 type = internal/xwindow
-
+; TODO provide fix to polybar example bar
 label-maxlen = 160
 
 [module/xkeyboard]
@@ -354,7 +354,8 @@ type = custom/menu
 
 format-spacing = 1
 
-label-open = 
+; TODO provide fix to polybar example bar
+label-open = 
 label-open-foreground = ${colors.secondary}
 label-close =  cancel
 label-close-foreground = ${colors.secondary}
