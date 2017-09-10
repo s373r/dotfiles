@@ -43,6 +43,7 @@ module-margin-left = 1
 module-margin-right = 2
 
 ; TODO maybe to need to add 1..4 fonts
+; TODO https://github.com/stark/siji for cute wifi icons
 font-0 = FontAwesome:pixelsize=12;2
 font-1 = FuraCodeNF:pixelsize=10;1
 font-2 = OpenSymbol:pixelsize=10;0
@@ -52,7 +53,7 @@ font-2 = OpenSymbol:pixelsize=10;0
 
 modules-left = bspwm i3
 modules-center = xwindow
-modules-right = filesystem xbacklight xkeyboard memory cpu battery temperature date powermenu
+modules-right = filesystem xbacklight xkeyboard memory cpu wlan battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -217,9 +218,10 @@ format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4bffdc
 label = %percentage_used%%
 
+; TODO provide fix to polybar example bar
 [module/wlan]
 type = internal/network
-interface =
+interface = wlp7s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
@@ -239,37 +241,37 @@ ramp-signal-3 = 
 ramp-signal-4 = 
 ramp-signal-foreground = ${colors.foreground-alt}
 
-[module/eth]
-type = internal/network
-interface =
-interval = 3.0
-
-format-connected-underline = #55aa55
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
-
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
-
-[module/date]
-type = internal/date
-interval = 5
-
-date =
-date-alt = " %Y-%m-%d"
-
-time = %H:%M
-time-alt = %H:%M:%S
-
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
-
-label = %date% %time%
+;[module/eth]
+;type = internal/network
+;interface =
+;interval = 3.0
+;
+;format-connected-underline = #55aa55
+;format-connected-prefix = " "
+;format-connected-prefix-foreground = ${colors.foreground-alt}
+;label-connected = %local_ip%
+;
+;format-disconnected =
+;;format-disconnected = <label-disconnected>
+;;format-disconnected-underline = ${self.format-connected-underline}
+;;label-disconnected = %ifname% disconnected
+;;label-disconnected-foreground = ${colors.foreground-alt}
+;
+;[module/date]
+;type = internal/date
+;interval = 5
+;
+;date =
+;date-alt = " %Y-%m-%d"
+;
+;time = %H:%M
+;time-alt = %H:%M:%S
+;
+;format-prefix = 
+;format-prefix-foreground = ${colors.foreground-alt}
+;format-underline = #0a6cf5
+;
+;label = %date% %time%
 
 [module/volume]
 type = internal/volume
