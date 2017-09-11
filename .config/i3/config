@@ -205,15 +205,3 @@ exec_always feh --bg-fill ~/Downloads/patrick-mcmanaman-116034.jpg
 # todo check a running command
 exec_always --no-startup-id ~/soft/telegram/Telegram
 #=======================================================================================================================
-
-## Start i3bar to display a workspace bar (plus the system information i3status
-## finds out, if available)
-#bar {
-##    position                top
-#    strip_workspace_numbers yes
-#    font                    pango: monospace, FontAwesome 8
-#    separator_symbol        "|"
-##    tray_padding            15
-#    status_command          i3status
-#    tray_output             primary
-#}
