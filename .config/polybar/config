@@ -43,10 +43,11 @@ module-margin-left = 1
 module-margin-right = 2
 
 ; TODO maybe to need to add 1..4 fonts
-; TODO https://github.com/stark/siji for cute wifi icons
-font-0 = FontAwesome:pixelsize=12;2
-font-1 = FuraCodeNF:pixelsize=10;1
-font-2 = OpenSymbol:pixelsize=10;0
+; TODO https://github.com/fauno/siji/tree/master/ttf
+font-0 = Siji:pixelsize=15;1
+font-1 = FontAwesome:pixelsize=12;2
+font-2 = FuraCodeNF:pixelsize=10;1
+font-3 = OpenSymbol:pixelsize=10;0
 
 ;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 ;font-2 = siji:pixelsize=10;1
