@@ -74,7 +74,6 @@ tray-padding = 2
 
 [module/xwindow]
 type = internal/xwindow
-; TODO provide fix to polybar example bar
 label-maxlen = 160
 
 [module/xkeyboard]
@@ -219,7 +218,6 @@ format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4bffdc
 label = %percentage_used%%
 
-; TODO provide fix to polybar example bar
 [module/wlan]
 type = internal/network
 interface = wlp7s0
