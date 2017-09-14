@@ -47,9 +47,6 @@ font-0 = Siji:pixelsize=15;antialias=false;1
 font-1 = FontAwesome:pixelsize=12;2
 font-2 = FuraCodeNF:pixelsize=10;1
 
-;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-;font-2 = siji:pixelsize=10;1
-
 ; Note:
 ; -----
 ;"wlan" and "volume" must be compiled into polybar
