@@ -50,9 +50,12 @@ font-2 = FuraCodeNF:pixelsize=10;1
 ;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 ;font-2 = siji:pixelsize=10;1
 
+; Note:
+; -----
+;"wlan" and "volume" must be compiled into polybar
 modules-left = bspwm i3
 modules-center = xwindow
-modules-right = filesystem xbacklight xkeyboard memory cpu wlan battery temperature date powermenu
+modules-right = filesystem volume xbacklight xkeyboard memory cpu wlan battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
