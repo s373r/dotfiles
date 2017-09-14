@@ -182,7 +182,8 @@ label-song-ellipsis = true
 type = internal/xbacklight
 
 format = <label> <bar>
-label = BL
+label = 
+label-foreground = ${colors.foreground-alt}
 
 bar-width = 10
 bar-indicator = |
@@ -269,8 +270,8 @@ label = %date% %time%
 type = internal/volume
 
 format-volume = <label-volume> <bar-volume>
-label-volume = VOL
-label-volume-foreground = ${root.foreground}
+label-volume = 
+label-volume-foreground = ${colors.foreground-alt}
 
 format-muted-prefix = " "
 format-muted-foreground = ${colors.foreground-alt}
