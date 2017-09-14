@@ -28,6 +28,12 @@ font pango: monospace 0
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
+# Border style
+#===============================================================================
+new_window          pixel 7
+new_float           pixel 7
+hide_edge_borders   smart
+#===============================================================================
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
