@@ -30,9 +30,8 @@ font pango: monospace 0
 
 # Border style
 #===============================================================================
-new_window          pixel 7
-new_float           pixel 7
-hide_edge_borders   smart
+new_window  pixel 7
+new_float   pixel 7
 #===============================================================================
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -105,9 +104,22 @@ bindsym Print           exec scrot '%Y-%m-%d-H:%M:%S-$wx$h_scrot.png' -e 'mv $f 
 # todo doesn't work
 bindsym Print+Shift     exec scrot -s '%Y-%m-%d-H:%M:%S-$wx$h_scrot.png' -e 'mv $f ~/Pictures/'
 
+#===============================================================================
+# Autorun
+#===============================================================================
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+# todo provide config file
+exec_always --no-startup-id compton -b -f -i 0.5
+# todo make folder for wallpapers
+# todo feh wasn't found in the defaultss
+exec_always feh --bg-fill ~/Downloads/patrick-mcmanaman-116034.jpg
+# todo check a running command
+exec_always --no-startup-id ~/soft/telegram/Telegram
+#===============================================================================
 # Workspaces
 #===============================================================================
-# declaration
+# Declaration
+#-------------------------------------------------------------------------------
 set $workspace1     "1:"
 set $workspace2     "2:"
 set $workspace3     "3:"
@@ -118,8 +130,9 @@ set $workspace7     "7:7"
 set $workspace8     "8:8"
 set $workspace9     "9:9"
 set $workspace10    "10:10"
-
-# switch to workspace
+#-------------------------------------------------------------------------------
+# Switch to workspace
+#-------------------------------------------------------------------------------
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
@@ -132,8 +145,9 @@ bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace10
 
 bindsym $mod+Tab workspace back_and_forth
-
-# move focused container to workspace
+#-------------------------------------------------------------------------------
+# Move focused container to workspace
+#-------------------------------------------------------------------------------
 bindsym $mod+Shift+1 move container to workspace $workspace1
 bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
@@ -144,6 +158,14 @@ bindsym $mod+Shift+7 move container to workspace $workspace7
 bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
+#-------------------------------------------------------------------------------
+# Application assign
+#-------------------------------------------------------------------------------
+assign [class="jetbrains"]              → $workspace2
+
+assign [class="^TelegramDesktop$"]      → $workspace4
+
+assign [class="^Pcmanfm$"]              → $workspace5
 #===============================================================================
 
 # reload the configuration file
@@ -196,17 +218,4 @@ bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   0 toggle
 # todo xbacklight wasn't found in the defaults
 bindsym XF86MonBrightnessUp   exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
-#===============================================================================
-
-#===============================================================================
-# Autorun
-#===============================================================================
-exec_always --no-startup-id ~/.config/polybar/launch.sh
-# todo provide config file
-exec_always --no-startup-id compton -b -f -i 0.5
-# todo make folder for wallpapers
-# todo feh wasn't found in the defaultss
-exec_always feh --bg-fill ~/Downloads/patrick-mcmanaman-116034.jpg
-# todo check a running command
-exec_always --no-startup-id ~/soft/telegram/Telegram
 #===============================================================================
