@@ -115,6 +115,7 @@ exec_always --no-startup-id compton -b -f -i 0.5
 exec_always feh --bg-fill ~/Downloads/patrick-mcmanaman-116034.jpg
 # todo check a running command
 exec_always --no-startup-id ~/soft/telegram/Telegram
+exec_always --no-startup-id pcmanfm
 #===============================================================================
 # Workspaces
 #===============================================================================
