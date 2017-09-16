@@ -30,10 +30,17 @@ def copy_config_files(source_dir_path, destination_dir_path):
         shutil.copy(source_file, destination_file)
 
 
+def init():
+    if os.geteuid() != 0:
+        exit('You must be root to permit this action')
+    pass
+
+
 # todo make install by symlinks, not copying config files
 parser = argparse.ArgumentParser()
 parser.add_argument('action',
-                    choices=['grub', 'install'],
+                    choices=['grub', 'install', 'init'],
+                    # todo change help
                     help='grub config files from $HOME or install them there')
 
 script_action = parser.parse_args().action
@@ -53,5 +60,8 @@ dotfile_repo_path = Path(__file__).absolute().parent
 # todo refactoring: move to policy-based paradigm
 if script_action == 'grub':
     copy_config_files(home_path, dotfile_repo_path)
-else:
+elif script_action == 'install':
     copy_config_files(dotfile_repo_path, home_path)
+else:
+    init()
+
