@@ -57,7 +57,7 @@ class InstallationStep:
     def __exit__(self, exc_type, exc_val, exc_tb):
         ok = sys.exc_info()[0] is None
         print(self.get_message('green' if ok else 'red',
-                               'Done' if ok else 'Failure'))
+                               'ok' if ok else 'fail'))
 
     def get_message(self, color, postfix_text=''):
         if postfix_text:
