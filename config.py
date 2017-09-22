@@ -1,9 +1,80 @@
 #!/usr/bin/env python3
 
 from pathlib import Path
-import argparse
+from termcolor import cprint, colored
 import os
+import sys
+import argparse
 import shutil
+import traceback
+import subprocess
+
+
+def print_error(message):
+    cprint(message, 'red')
+
+
+def check_root_right():
+    if os.geteuid() != 0:
+        raise Exception('You must be root to permit this action!')
+
+
+def _change_privileges(root):
+    gid = 0 if root else int(os.getenv('SUDO_GID'))
+    uid = 0 if root else int(os.getenv('SUDO_UID'))
+
+    os.setresgid(gid, gid, -1)
+    os.setresuid(uid, uid, -1)
+
+
+class RootRights:
+
+    def __enter__(self):
+        _change_privileges(root=True)
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        _change_privileges(root=False)
+
+
+class InstallationStep:
+
+    def __init__(self, message, bold=True):
+        self._message = message
+        self._attrs = attrs=['bold'] if bold else []
+
+    def __enter__(self):
+        print(self.get_message('white'))
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        ok = sys.exc_info()[0] is None
+        print(self.get_message('green' if ok else 'red',
+                               'Done' if ok else 'Failure'))
+
+    def get_message(self, color, postfix_text=''):
+        if postfix_text:
+            postfix_text = '... {}'.format(postfix_text)
+        return colored('* {}{}'.format(self._message, postfix_text),
+                       color, attrs=self._attrs)
+
+
+def install_step(function):
+    def _install_step(*args, **kwargs):
+        with InstallationStep('Installing "{}"'.format(function.__name__)):
+            return function(*args, **kwargs)
+
+    return _install_step
+
+
+def require_packages(packages):
+    def decorator(function):
+        def _require_packages(self, *args, **kwargs):
+            self.installer_manager.install_packages(packages)
+            return function(self, *args, **kwargs)
+
+        _require_packages.__name__ = function.__name__
+        return _require_packages
+
+    return decorator
 
 
 def copy_config_files(source_dir_path, destination_dir_path):
@@ -22,6 +93,7 @@ def copy_config_files(source_dir_path, destination_dir_path):
         # todo add a cool colored logger
         print('from', source_file, 'to', destination_file)
 
+        # todo mkdir from "Path" class
         os.makedirs(destination_dir, exist_ok=True)
 
         if destination_file_path.exists():
@@ -30,38 +102,199 @@ def copy_config_files(source_dir_path, destination_dir_path):
         shutil.copy(source_file, destination_file)
 
 
-def init():
-    if os.geteuid() != 0:
-        exit('You must be root to permit this action')
-    pass
+class ProgramManager:
+    @staticmethod
+    def run(command, output_expected_string=None, print_output=True):
+        process = subprocess.Popen(command, shell=True,
+                                   stdout=subprocess.PIPE,
+                                   stderr=subprocess.STDOUT,
+                                   universal_newlines=True)
+        output = ''
+        while True:
+            line = process.stdout.readline()
+            if print_output:
+                print(line, end='', flush=True)
+            output += line
+
+            return_code = process.poll()
+            if return_code is not None:
+                break
+
+        if return_code != 0:
+            raise Exception('Non-zero return code for "{}"'.format(command))
+
+        if output_expected_string and output_expected_string not in output:
+            raise Exception('"{}" was not found in the output'
+                            .format(output_expected_string))
 
 
-# todo make install by symlinks, not copying config files
-parser = argparse.ArgumentParser()
-parser.add_argument('action',
-                    choices=['grub', 'install', 'init'],
-                    # todo change help
-                    help='grub config files from $HOME or install them there')
+class InitManager:
+    def __init__(self, dotfile_repo_path):
+        cprint('''
+           .                                           
+          ;WL                      L        j.         
+         f#E#K:    :;;;;;;;;;;;;;. #K:      EW,        
+       .E#f :K#t    jWWWWWWWW###L  :K#t     E##j       
+      iWW;    L#G.          ,W#f     L#G.   E###D.     
+     L##Lffi   t#W,        ,##f       t#W,  E#jG#W;    
+    tLLG##L .jffD##f      i##j     .jffD##f E#t t##f   
+      ,W#i .fLLLD##L     i##t     .fLLLD##L E#t  :K#E: 
+     j#E.      ;W#i     t##t          ;W#i  E#KDDDD###i
+   .D#j       j#E.     t##i          j#E.   E#f,t#Wi,,,
+  ,WK,      .D#f      j##;         .D#f     E#t  ;#W:  
+  EG.       KW,      :##,          KW,      DWi   ,KK: 
+  ,         G.       ,W,           G.                  
+                     ::                                
+        ''', 'red')
+        check_root_right()
+        _change_privileges(root=False)
 
-script_action = parser.parse_args().action
+        self.installer_manager = InstallerManager()
+        self.git_manager = GitManager(dotfile_repo_path)
 
-files = [
-    # configs
-    '.config/i3/config',
-    '.config/polybar/config',
-    '.zshrc',
-    # other stuff
-    '.config/polybar/launch.sh'
-]
+    @install_step
+    @require_packages(['git', 'zsh'])
+    def ohmyzsh_install(self):
+        oh_my_zsh_install_command = 'sh -c "$(wget https://' \
+                                    'raw.githubusercontent.com/robbyrussell/' \
+                                    'oh-my-zsh/master/tools/install.sh -O -)"'
+        ProgramManager.run(oh_my_zsh_install_command,
+                           output_expected_string='is now installed')
+        # todo decorator
+        git_repo_urls = [
+            'https://github.com/zsh-users/zsh-completions',
+            'https://github.com/zdharma/history-search-multi-word',
+            'https://github.com/zdharma/fast-syntax-highlighting'
+        ]
 
-home_path = Path.home()
-dotfile_repo_path = Path(__file__).absolute().parent
+        for git_repo_url in git_repo_urls:
+            self.git_manager.clone(git_repo_url,
+                                   Path('~/.oh-my-zsh/custom/plugins/'))
 
-# todo refactoring: move to policy-based paradigm
-if script_action == 'grub':
-    copy_config_files(home_path, dotfile_repo_path)
-elif script_action == 'install':
-    copy_config_files(dotfile_repo_path, home_path)
-else:
-    init()
+    @install_step
+    @require_packages(['i3'])
+    def i3_install(self):
+        pass
 
+    @install_step
+    @require_packages(['ninja-build',
+                       # https://github.com/jaagr/polybar/wiki/Compiling#apt-get
+                       'cmake',
+                       'cmake-data',
+                       'libcairo2-dev',
+                       'libxcb1-dev',
+                       'libxcb-ewmh-dev',
+                       'libxcb-icccm4-dev',
+                       'libxcb-image0-dev',
+                       'libxcb-randr0-dev',
+                       'libxcb-util0-dev',
+                       'libxcb-xkb-dev',
+                       'pkg-config',
+                       'python-xcbgen',
+                       'xcb-proto',
+                       'libxcb-xrm-dev',
+                       'i3-wm',
+                       'libasound2-dev',
+                       'libmpdclient-dev',
+                       'libiw-dev',
+                       'libcurl4-openssl-dev'])
+    def polybar_install(self):
+        repo_path = self.git_manager.clone('https://github.com/jaagr/polybar',
+                                           recursive=True)
+        build_dir_path = repo_path / 'build'
+        build_dir_path.mkdir()
+
+        cmake_generate_command = 'cmake -G Ninja -B{} -H{}'.format(build_dir_path, build_dir_path.parent)
+        cmake_build_command = 'cmake --build {}'.format(build_dir_path)
+        ninja_install_command = 'ninja -C{} install'.format(build_dir_path)
+
+        ProgramManager.run(cmake_generate_command)
+        ProgramManager.run(cmake_build_command)
+        with RootRights():
+            ProgramManager.run(ninja_install_command)
+
+
+class InstallerManager:
+    def __init__(self):
+        with RootRights(), InstallationStep('Update list of available packages'):
+            ProgramManager.run('apt update')
+
+    def install_packages(self, packages):
+        package_names = ' '.join(packages).strip()
+        with InstallationStep('Installing "{}"'.format(package_names), False):
+            with RootRights():
+                ProgramManager.run('apt install {}'.format(package_names))
+
+
+class GitManager:
+    def __init__(self, dotfile_repo_path):
+        self._3rdParty_path = dotfile_repo_path / '3rdParty'
+        self._3rdParty_path.mkdir(exist_ok=True)
+
+    def clone(self, git_repo_url, destination_dir_path=None, recursive=False):
+        if destination_dir_path is None:
+            destination_dir_path = self._3rdParty_path
+
+        git_repo_name = git_repo_url.split('/')[-1]
+        destination_dir_path = destination_dir_path / git_repo_name
+        destination_dir = str(destination_dir_path)
+
+        if destination_dir_path.exists():
+            shutil.rmtree(destination_dir)
+
+        # print_regular('Cloning "{}" to "{}"'.format(
+        #     git_repo_url, destination_dir))
+        clone_command = 'git clone {} --depth 1 {} {}'.format(
+            '--recursive' if recursive else '', git_repo_url, destination_dir)
+
+        # todo check result
+        ProgramManager.run(clone_command)
+
+        return destination_dir_path
+
+
+def init(dotfile_repo_path):
+    try:
+        init_manager = InitManager(dotfile_repo_path)
+        init_manager.ohmyzsh_install()
+        init_manager.i3_install()
+        init_manager.polybar_install()
+    except Exception as e:
+        print_error('Error upon installation!')
+        # todo provide argument to enable printing traceback
+        traceback.print_exc()
+        print_error(str(e))
+        print_error('Installation is stopped! Exiting...')
+        exit(1)
+
+
+if __name__ == '__main__':
+
+    # todo make install by symlinks, not copying config files
+    parser = argparse.ArgumentParser()
+    parser.add_argument('action',
+                        choices=['grub', 'install', 'init'],
+                        # todo change help
+                        help='grub config files from $HOME or install them there')
+
+    script_action = parser.parse_args().action
+
+    files = [
+        # configs
+        '.config/i3/config',
+        '.config/polybar/config',
+        '.zshrc',
+        # other stuff
+        '.config/polybar/launch.sh'
+    ]
+
+    home_path = Path.home()
+    dotfile_repo_path = Path(__file__).absolute().parent
+
+    # todo refactoring: move to policy-based paradigm
+    if script_action == 'grub':
+        copy_config_files(home_path, dotfile_repo_path)
+    elif script_action == 'install':
+        copy_config_files(dotfile_repo_path, home_path)
+    else:
+        init(dotfile_repo_path)

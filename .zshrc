@@ -54,6 +54,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # [s3v3r] not bad: colored-man-pages
 # [s3v3r] doesn't work: colorize git-flow
 # [s3v3r] is gitfast/git-extras needed?
+# TODO resort. builtin | external
 plugins=(gitfast git-extras git-flow fast-syntax-highlighting history-search-multi-word zsh-completions)
 
 autoload -U colors && colors
