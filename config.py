@@ -8,6 +8,7 @@ import argparse
 import shutil
 import traceback
 import subprocess
+import platform
 
 
 def print_error(message):
@@ -28,6 +29,13 @@ def _change_privileges(root):
 
     os.setresgid(gid, gid, -1)
     os.setresuid(uid, uid, -1)
+
+
+# todo make RejectReason class
+def ubuntu_more_than_17_04():
+    (distro, version, _) = platform.linux_distribution()
+    return (distro == 'Ubuntu' and float(version) < 17.04,
+            'the workaround is needed only for Ubuntu more than 17.04')
 
 
 class RootRights:
@@ -58,12 +66,24 @@ class InstallationStep:
                        color, attrs=self._attrs)
 
 
-def install_step(function):
-    def _install_step(*args, **kwargs):
-        with InstallationStep('Installing "{}"'.format(function.__name__)):
-            return function(*args, **kwargs)
+def install_step(skip_if=None):
+    def decorator(function):
+        if skip_if is not None:
+            (skip, reason) = skip_if()
+            if skip:
+                # todo refactor duplicates
+                skip_message = '* Installing "{}"... skipped "{}"'.format(
+                    function.__name__, reason)
+                # a dummy callable function
+                return lambda _: cprint(skip_message, 'yellow', attrs=['bold'])
 
-    return _install_step
+        def _install_step(*args, **kwargs):
+            with InstallationStep('Installing "{}"'.format(function.__name__)):
+                return function(*args, **kwargs)
+
+        return _install_step
+
+    return decorator
 
 
 def require_packages(packages):
@@ -226,6 +246,7 @@ class InitManager:
         ProgramManager.run(cmake_build_command)
         ProgramManager.run(ninja_install_command, root=True)
 
+    @install_step(skip_if=ubuntu_more_than_17_04)
     def polybar_ubuntu_17_workaround(self):
         # https://github.com/jaagr/polybar/wiki/Compiling#version-mismatch-between-xcb-proto-and-libxcb-randr0-dev
         custom_xcb_proto_path = self.git_manager._3rdParty_path / 'custom-xcb-proto'
