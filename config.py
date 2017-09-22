@@ -317,7 +317,9 @@ def init(dotfile_repo_path):
         init_manager = InitManager(dotfile_repo_path)
         init_manager.ohmyzsh_install()
         init_manager.i3_install()
+        init_manager.compton_install()
         init_manager.polybar_install()
+        init_manager.polybar_ubuntu_17_workaround()
     except Exception as e:
         print_error('Error upon installation!')
         # todo provide argument to enable printing traceback
