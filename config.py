@@ -23,12 +23,14 @@ def _change_privileges(root):
     gid = 0 if root else int(os.getenv('SUDO_GID'))
     uid = 0 if root else int(os.getenv('SUDO_UID'))
 
+    if not root and uid == 0:
+        raise Exception('Rights weren\'t changed!')
+
     os.setresgid(gid, gid, -1)
     os.setresuid(uid, uid, -1)
 
 
 class RootRights:
-
     def __enter__(self):
         _change_privileges(root=True)
 
@@ -37,10 +39,9 @@ class RootRights:
 
 
 class InstallationStep:
-
     def __init__(self, message, bold=True):
         self._message = message
-        self._attrs = attrs=['bold'] if bold else []
+        self._attrs = ['bold'] if bold else []
 
     def __enter__(self):
         print(self.get_message('white'))
@@ -85,16 +86,13 @@ def copy_config_files(source_dir_path, destination_dir_path):
         source_file = str(source_file_path)
         destination_file = str(destination_file_path)
 
-        destination_dir = str(destination_dir_path)
-
         if not source_file_path.exists():
             raise FileNotFoundError(source_file)
 
         # todo add a cool colored logger
         print('from', source_file, 'to', destination_file)
 
-        # todo mkdir from "Path" class
-        os.makedirs(destination_dir, exist_ok=True)
+        destination_file_path.parent.mkdir(parents=True, exist_ok=True)
 
         if destination_file_path.exists():
             os.remove(destination_file)
@@ -104,11 +102,21 @@ def copy_config_files(source_dir_path, destination_dir_path):
 
 class ProgramManager:
     @staticmethod
-    def run(command, output_expected_string=None, print_output=True):
-        process = subprocess.Popen(command, shell=True,
-                                   stdout=subprocess.PIPE,
-                                   stderr=subprocess.STDOUT,
-                                   universal_newlines=True)
+    def run(command, output_expected_string=None, print_output=True,
+            root=False):
+
+        # todo refactor duplicates
+        if root:
+            with RootRights():
+                process = subprocess.Popen(command, shell=True,
+                                           stdout=subprocess.PIPE,
+                                           stderr=subprocess.STDOUT,
+                                           universal_newlines=True)
+        else:
+            process = subprocess.Popen(command, shell=True,
+                                       stdout=subprocess.PIPE,
+                                       stderr=subprocess.STDOUT,
+                                       universal_newlines=True)
         output = ''
         while True:
             line = process.stdout.readline()
@@ -177,6 +185,11 @@ class InitManager:
         pass
 
     @install_step
+    @require_packages(['compton'])
+    def compton_install(self):
+        pass
+
+    @install_step
     @require_packages(['ninja-build',
                        # https://github.com/jaagr/polybar/wiki/Compiling#apt-get
                        'cmake',
@@ -204,32 +217,57 @@ class InitManager:
         build_dir_path = repo_path / 'build'
         build_dir_path.mkdir()
 
-        cmake_generate_command = 'cmake -G Ninja -B{} -H{}'.format(build_dir_path, build_dir_path.parent)
+        cmake_generate_command = 'cmake -G Ninja -B{} -H{}'.format(
+            build_dir_path, build_dir_path.parent)
         cmake_build_command = 'cmake --build {}'.format(build_dir_path)
         ninja_install_command = 'ninja -C{} install'.format(build_dir_path)
 
         ProgramManager.run(cmake_generate_command)
         ProgramManager.run(cmake_build_command)
-        with RootRights():
-            ProgramManager.run(ninja_install_command)
+        ProgramManager.run(ninja_install_command, root=True)
+
+    def polybar_ubuntu_17_workaround(self):
+        # https://github.com/jaagr/polybar/wiki/Compiling#version-mismatch-between-xcb-proto-and-libxcb-randr0-dev
+        custom_xcb_proto_path = self.git_manager._3rdParty_path / 'custom-xcb-proto'
+        custom_xcb_proto_path.mkdir()
+
+        build_script = '''
+            cd {}
+            wget https://launchpad.net/ubuntu/+archive/primary/+files/xcb-proto_1.11.orig.tar.gz
+            wget https://launchpad.net/ubuntu/+archive/primary/+files/xcb-proto_1.11-1.diff.gz
+            tar -xzvf xcb-proto_1.11.orig.tar.gz
+            gzip -d xcb-proto_1.11-1.diff.gz
+            cd xcb-proto-1.11
+            patch -p1 <../xcb-proto_1.11-1.diff
+            ./configure
+            make -j4
+        '''.format(custom_xcb_proto_path)
+
+        ProgramManager.run(build_script)
+        ProgramManager.run('make -C{} install'.format(
+            custom_xcb_proto_path / 'xcb-proto-1.11'), root=True)
 
 
 class InstallerManager:
     def __init__(self):
-        with RootRights(), InstallationStep('Update list of available packages'):
-            ProgramManager.run('apt update')
+        with InstallationStep('Update list of available packages'):
+            ProgramManager.run('apt update', root=True)
 
     def install_packages(self, packages):
         package_names = ' '.join(packages).strip()
         with InstallationStep('Installing "{}"'.format(package_names), False):
-            with RootRights():
-                ProgramManager.run('apt install {}'.format(package_names))
+            ProgramManager.run('apt install -y {}'.format(package_names),
+                               root=True)
 
 
 class GitManager:
     def __init__(self, dotfile_repo_path):
-        self._3rdParty_path = dotfile_repo_path / '3rdParty'
-        self._3rdParty_path.mkdir(exist_ok=True)
+        _3rdParty_path = dotfile_repo_path / '3rdParty'
+        if _3rdParty_path.exists():
+            shutil.rmtree(str(_3rdParty_path))
+        _3rdParty_path.mkdir(exist_ok=True)
+
+        self._3rdParty_path = _3rdParty_path
 
     def clone(self, git_repo_url, destination_dir_path=None, recursive=False):
         if destination_dir_path is None:
@@ -269,7 +307,6 @@ def init(dotfile_repo_path):
 
 
 if __name__ == '__main__':
-
     # todo make install by symlinks, not copying config files
     parser = argparse.ArgumentParser()
     parser.add_argument('action',
