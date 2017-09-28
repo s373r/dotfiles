@@ -9,6 +9,7 @@ import shutil
 import traceback
 import subprocess
 import platform
+import functools
 
 
 def print_error(message):
@@ -46,7 +47,7 @@ class RootRights:
         _change_privileges(root=False)
 
 
-class InstallationStep:
+class PrintStep:
     def __init__(self, message, bold=True):
         self._message = message
         self._attrs = ['bold'] if bold else []
@@ -66,34 +67,47 @@ class InstallationStep:
                        color, attrs=self._attrs)
 
 
-def install_step(skip_if=None):
-    def decorator(function):
+class InstallationStep:
+    def __init__(self, skip_if=None):
+        self._skip = False
+        self._reason = ''
         if skip_if is not None:
-            (skip, reason) = skip_if()
-            if skip:
-                # todo refactor duplicates
-                skip_message = '* Installing "{}"... skipped "{}"'.format(
-                    function.__name__, reason)
-                # a dummy callable function
-                return lambda _: cprint(skip_message, 'yellow', attrs=['bold'])
+            (self._skip, self._reason) = skip_if()
 
-        def _install_step(*args, **kwargs):
-            with InstallationStep('Installing "{}"'.format(function.__name__)):
-                return function(*args, **kwargs)
+    def __call__(self, original_func):
+        decorator_self = self
 
-        return _install_step
+        def skipped_function(*args, **kwargs):
+            # todo refactor duplicates
+            skip_message = '* Installing "{}"... skipped "{}"'.format(
+                original_func.__name__, decorator_self._reason)
+            cprint(skip_message, 'yellow', attrs=['bold'])
 
-    return decorator
+        def installation_function(*args, **kwargs):
+            with PrintStep('Installing "{}"'.format(original_func.__name__)):
+                original_func(*args, **kwargs)
+
+        return skipped_function if self._skip else installation_function
 
 
+def install_step(f):
+    @functools.wraps(f)
+    def wrapper(*args, **kwargs):
+        with PrintStep('Installing "{}"'.format(f.__name__)):
+            return f(*args, **kwargs)
+
+    return wrapper
+
+
+# todo migrate to class like a InstallationStep
 def require_packages(packages):
-    def decorator(function):
-        def _require_packages(self, *args, **kwargs):
+    def decorator(f):
+        @functools.wraps(f)
+        def wrapper(self, *args, **kwargs):
             self.installer_manager.install_packages(packages)
-            return function(self, *args, **kwargs)
+            return f(self, *args, **kwargs)
 
-        _require_packages.__name__ = function.__name__
-        return _require_packages
+        return wrapper
 
     return decorator
 
@@ -180,7 +194,7 @@ class InitManager:
         self.installer_manager = InstallerManager()
         self.git_manager = GitManager(dotfile_repo_path)
 
-    @install_step
+    @InstallationStep()
     @require_packages(['git', 'zsh'])
     def ohmyzsh_install(self):
         oh_my_zsh_install_command = 'sh -c "$(wget https://' \
@@ -199,17 +213,17 @@ class InitManager:
             self.git_manager.clone(git_repo_url,
                                    Path('~/.oh-my-zsh/custom/plugins/'))
 
-    @install_step
+    @InstallationStep()
     @require_packages(['i3'])
     def i3_install(self):
         pass
 
-    @install_step
+    @InstallationStep()
     @require_packages(['compton'])
     def compton_install(self):
         pass
 
-    @install_step
+    @InstallationStep()
     @require_packages(['ninja-build',
                        # https://github.com/jaagr/polybar/wiki/Compiling#apt-get
                        'cmake',
@@ -246,7 +260,7 @@ class InitManager:
         ProgramManager.run(cmake_build_command)
         ProgramManager.run(ninja_install_command, root=True)
 
-    @install_step(skip_if=ubuntu_more_than_17_04)
+    @InstallationStep(skip_if=ubuntu_more_than_17_04)
     def polybar_ubuntu_17_workaround(self):
         # https://github.com/jaagr/polybar/wiki/Compiling#version-mismatch-between-xcb-proto-and-libxcb-randr0-dev
         custom_xcb_proto_path = self.git_manager._3rdParty_path / 'custom-xcb-proto'
@@ -271,12 +285,12 @@ class InitManager:
 
 class InstallerManager:
     def __init__(self):
-        with InstallationStep('Update list of available packages'):
+        with PrintStep('Update list of available packages'):
             ProgramManager.run('apt update', root=True)
 
     def install_packages(self, packages):
         package_names = ' '.join(packages).strip()
-        with InstallationStep('Installing "{}"'.format(package_names), False):
+        with PrintStep('Installing "{}"'.format(package_names), False):
             ProgramManager.run('apt install -y {}'.format(package_names),
                                root=True)
 
