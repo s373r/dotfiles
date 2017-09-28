@@ -136,8 +136,7 @@ def copy_config_files(source_dir_path, destination_dir_path):
 
 class ProgramManager:
     @staticmethod
-    def run(command, output_expected_string=None, print_output=True,
-            root=False):
+    def run(command, output_expected_string=None, root=False):
 
         # todo refactor duplicates
         if root:
@@ -154,7 +153,7 @@ class ProgramManager:
         output = ''
         while True:
             line = process.stdout.readline()
-            if print_output:
+            if parsed_arguments.verbose:
                 print(line, end='', flush=True)
             output += line
 
@@ -336,8 +335,8 @@ def init(dotfile_repo_path):
         init_manager.polybar_ubuntu_17_workaround()
     except Exception as e:
         print_error('Error upon installation!')
-        # todo provide argument to enable printing traceback
-        traceback.print_exc()
+        if parsed_arguments.verbose:
+            traceback.print_exc()
         print_error(str(e))
         print_error('Installation is stopped! Exiting...')
         exit(1)
@@ -345,13 +344,17 @@ def init(dotfile_repo_path):
 
 if __name__ == '__main__':
     # todo make install by symlinks, not copying config files
-    parser = argparse.ArgumentParser()
-    parser.add_argument('action',
-                        choices=['grub', 'install', 'init'],
-                        # todo change help
-                        help='grub config files from $HOME or install them there')
+    argument_parser = argparse.ArgumentParser()
+    argument_parser.add_argument('action',
+                                 choices=['grub', 'install', 'init'],
+                                 # todo change help
+                                 help='grub config files from $HOME or install them there')
+    argument_parser.add_argument('-v', '--verbose', action='store_true',
+                                 help='increase output verbosity')
 
-    script_action = parser.parse_args().action
+    parsed_arguments = argument_parser.parse_args()
+
+    script_action = parsed_arguments.action
 
     files = [
         # configs
