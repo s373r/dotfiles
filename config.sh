@@ -45,8 +45,22 @@ function symlinkHasPresent() {
 	ln -s "${source}" "${symlink}";
 }
 
+function installGitCredentials() {
+	# todo check the previous credentials
+	local gitUserName="s373r";
+	local gitUserEmail="you@example.com";
+
+	echo "Setting global git name: ${gitUserName}";
+	git config --global user.name "${gitUserName}";
+
+	echo "Setting global git email: ${gitUserEmail}";
+	git config --global user.email "${gitUserEmail}";
+}
+
 function doInstall() {
 	symlinkHasPresent .bashrc;
+
+	installGitCredentials;
 }
 
 function main() {
