@@ -57,10 +57,16 @@ function installGitCredentials() {
 	git config --global user.email "${gitUserEmail}";
 }
 
+function createDirectoryStructure() {
+	echo "Create ~/bin if not exists";
+	mkdir -p ${HOME}/bin;
+}
+
 function doInstall() {
 	symlinkHasPresent .bashrc;
 
 	installGitCredentials;
+	createDirectoryStructure;
 }
 
 function main() {
