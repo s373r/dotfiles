@@ -48,7 +48,7 @@ function symlinkHasPresent() {
 function installGitCredentials() {
 	# todo check the previous credentials
 	local gitUserName="s373r";
-	local gitUserEmail="you@example.com";
+	local gitUserEmail="s373r@users.noreply.github.com";
 
 	echo "Setting global git name: ${gitUserName}";
 	git config --global user.name "${gitUserName}";
