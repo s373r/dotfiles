@@ -32,7 +32,7 @@ function symlinkHasPresent() {
 	fi
 
 	if [ -L "${symlink}" ]; then
-		echo "Skipping creation of a symlink for \"${what}\: already exists.";
+		echo "Skipping creation of a symlink for \"${what}\": already exists.";
 		return 0;
 	fi
 	
