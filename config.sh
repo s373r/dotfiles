@@ -63,7 +63,7 @@ function createDirectoryStructure() {
 }
 
 function doInstall() {
-	symlinkHasPresent .bashrc;
+	symlinkHasPresent .zshrc;
 
 	installGitCredentials;
 	createDirectoryStructure;
