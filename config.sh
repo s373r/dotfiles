@@ -2,7 +2,7 @@
 
 set -e;
 
-DOTFILES="$(dirname "$0")";
+DOTFILES="$(readlink -f $(dirname "$0"))";
 
 function echo_to_stderr() {
 	echo "$*" 1>&2;
