@@ -66,6 +66,7 @@ function doInstall() {
 	createDirectoryStructure;
 
 	symlinkHasPresent .zshrc;
+	symlinkHasPresent bin/output-video-to-the-second-monitor.sh;
 
 	installGitCredentials;
 }
