@@ -63,10 +63,11 @@ function createDirectoryStructure() {
 }
 
 function doInstall() {
+	createDirectoryStructure;
+
 	symlinkHasPresent .zshrc;
 
 	installGitCredentials;
-	createDirectoryStructure;
 }
 
 function main() {
