@@ -1,3 +1,4 @@
+# TODO: check generated  settings
 ## The following lines were added by compinstall
 #
 #zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
@@ -16,3 +17,15 @@
 #SAVEHIST=1000
 #bindkey -e
 ## End of lines configured by zsh-newuser-install
+
+# TODO: Use "source ~/antigen.zsh" (starts from a dot) when
+# https://github.com/zsh-users/antigen/issues/650 will be fixed
+source ~/antigen.zsh
+
+antigen init ~/.antigenrc
+
+export NVM_DIR="${HOME}/.nvm"
+[ -s "${NVM_DIR}/nvm.sh" ] && source "${NVM_DIR}/nvm.sh"
+
+alias grfb='git checkout master && git pull --rebase && git checkout - && git rebase master'
+alias gcfb='git checkout master && git pull --rebase && git checkout -b'
