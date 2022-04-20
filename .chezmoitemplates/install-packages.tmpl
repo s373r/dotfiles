@@ -1,0 +1,6 @@
+{{ if ne .chezmoi.osRelease.id "fedora" -}}
+    {{ fail "Only Fedora is supported at the moment!" }}
+{{ end -}}
+
+sudo dnf install meson -y \
+    libinput-devel libudev-devel # dependencies for libinput-config
