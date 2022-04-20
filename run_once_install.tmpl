@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euxo pipefail
+
 {{ if ne .chezmoi.os "linux" -}}
     {{ fail "Only Linux is supported at the moment!" }}
 {{ end -}}
