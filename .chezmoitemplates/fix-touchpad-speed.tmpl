@@ -1,0 +1,22 @@
+# NOTE: use subshell to work with "cd"
+{
+  cd /tmp/
+
+  git clone https://gitlab.com/kirbykevinson/libinput-config --depth 1
+  cd libinput-config
+
+  meson build
+  cd build
+  ninja
+
+  sudo ninja install
+
+  {
+    echo "override-compositor=enabled"
+    echo "scroll-factor=0.3"
+    echo "discrete-scroll-factor=0.3"
+  } | sudo tee /etc/libinput.conf > /dev/null
+
+  cd ../..
+  rm -rf libinput-config
+}

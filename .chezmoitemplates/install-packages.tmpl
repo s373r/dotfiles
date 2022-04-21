@@ -3,4 +3,8 @@
 {{ end -}}
 
 sudo dnf install meson -y \
-    libinput-devel libudev-devel # dependencies for libinput-config
+    libinput-devel libudev-devel # fix-touchpad-speed.tmpl: dependencies for libinput-config
+
+{{ if eq (env "FIX_TOUCHPAD_SPEED") "yes" }}
+{{     template "fix-touchpad-speed.tmpl" . }}
+{{ end }}
