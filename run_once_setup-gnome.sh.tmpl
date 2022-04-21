@@ -1,6 +1,8 @@
 {{ if eq (env "SETUP_GNOME") "yes" -}}
 #!/usr/bin/env bash
 
+set -euxo pipefail
+
 # NOTE: wayland: enable the experimental fractional scaling feature
 gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
 gsettings set org.gnome.mutter center-new-windows true
