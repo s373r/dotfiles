@@ -1,5 +1,5 @@
 {{ if ne .chezmoi.osRelease.id "fedora" -}}
-    {{ fail "Only Fedora is supported at the moment!" }}
+{{     fail "Only Fedora is supported at the moment!" }}
 {{ end -}}
 
 sudo dnf install meson -y \

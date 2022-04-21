@@ -2,10 +2,10 @@
 
 set -euxo pipefail
 
-{{ if ne .chezmoi.os "linux" -}}
-    {{ fail "Only Linux is supported at the moment!" }}
-{{ end -}}
+{{ if ne .chezmoi.os "linux" }}
+{{     fail "Only Linux is supported at the moment!" }}
+{{ end }}
 
-{{ if eq (env "INSTALL_PACKAGES") "yes" -}}
-    {{ template "install-packages.tmpl" . }}
-{{ end -}}
+{{ if eq (env "INSTALL_PACKAGES") "yes" }}
+{{     template "install-packages.tmpl" . }}
+{{ end }}
