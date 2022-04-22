@@ -8,7 +8,7 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 antigen bundle popstas/zsh-command-time
 # TODO: Select theme for fast-syntax-highlighting https://asciinema.org/a/183814
-antigen bundle zdharma/fast-syntax-highlighting
+antigen bundle zdharma-continuum/fast-syntax-highlighting
 antigen bundle zdharma/history-search-multi-word
 
 antigen apply
