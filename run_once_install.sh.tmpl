@@ -8,6 +8,10 @@ set -euxo pipefail
 
 {{ template "install-packages.tmpl" . }}
 
+{{ if eq (env "FIX_TOUCHPAD_SPEED") "yes" }}
+{{     template "fix-touchpad-speed.tmpl" . }}
+{{ end }}
+
 chsh -s $(which zsh)
 
 zsh
