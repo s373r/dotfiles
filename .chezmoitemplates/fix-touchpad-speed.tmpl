@@ -1,25 +1,22 @@
-# NOTE: use subshell to work with "cd"
+pushd /tmp/
+
+git clone https://gitlab.com/kirbykevinson/libinput-config --depth 1
+pushd libinput-config
+
+meson build
+pushd build
+ninja
+
+sudo ninja install
+
 {
-  pushd /tmp/
+  echo "override-compositor=enabled"
+  echo "scroll-factor=0.3"
+  echo "discrete-scroll-factor=0.3"
+} | sudo tee /etc/libinput.conf > /dev/null
 
-  git clone https://gitlab.com/kirbykevinson/libinput-config --depth 1
-  pushd libinput-config
+popd
+popd
+popd
 
-  meson build
-  pushd build
-  ninja
-
-  sudo ninja install
-
-  {
-    echo "override-compositor=enabled"
-    echo "scroll-factor=0.3"
-    echo "discrete-scroll-factor=0.3"
-  } | sudo tee /etc/libinput.conf > /dev/null
-
-  popd
-  popd
-  popd
-
-  rm -rf /tmp/libinput-config
-}
+rm -rf /tmp/libinput-config
