@@ -1,12 +1,12 @@
 # NOTE: use subshell to work with "cd"
 {
-  cd /tmp/
+  pushd /tmp/
 
   git clone https://gitlab.com/kirbykevinson/libinput-config --depth 1
-  cd libinput-config
+  pushd libinput-config
 
   meson build
-  cd build
+  pushd build
   ninja
 
   sudo ninja install
@@ -17,6 +17,9 @@
     echo "discrete-scroll-factor=0.3"
   } | sudo tee /etc/libinput.conf > /dev/null
 
-  cd ../..
-  rm -rf libinput-config
+  popd
+  popd
+  popd
+
+  rm -rf /tmp/libinput-config
 }
