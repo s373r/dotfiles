@@ -11,12 +11,9 @@ $ INSTALL_GIT=yes chezmoi apply ~/.antigenrc --verbose && rm -rf ~/.antigen && z
 
 **Testing**
 
-1. Create a new isolated environment
-```shell
-$ podman run -it fedora
-```
+1. Create a VM and boot Fedora ISO (without installation)
 
 2. Install
 ```shell
-$ sudo dnf install -y git zsh && INSTALL_GIT=yes INSTALL_PACKAGES=yes sh -c "$(curl -fsLS git.io/chezmoi)" -- init --apply s373r --verbose
+$ INSTALL_PACKAGES=yes sh -c "$(curl -fsLS git.io/chezmoi)" -- init --apply s373r --verbose
 ```
