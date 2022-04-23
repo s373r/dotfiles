@@ -16,12 +16,7 @@ $ INSTALL_GIT=yes chezmoi apply ~/.antigenrc --verbose && rm -rf ~/.antigen && z
 $ podman run -it fedora
 ```
 
-2. Preparations
+2. Install
 ```shell
-$ dnf install -y git zsh
-```
-
-4. Install dotfiles
-```shell
-$ INSTALL_PACKAGES=yes sh -c "$(curl -fsLS git.io/chezmoi)" -- init --apply s373r
+$ sudo dnf install -y git zsh && INSTALL_GIT=yes INSTALL_PACKAGES=yes sh -c "$(curl -fsLS git.io/chezmoi)" -- init --apply s373r --verbose
 ```
