@@ -6,7 +6,6 @@ sudo dnf install -y \
 {{- if eq (env "FIX_TOUCHPAD_SPEED") "yes" -}}
     meson libinput-devel libudev-devel \
 {{- end -}}
-    git \
     zsh
 
 {{ if eq (env "FIX_TOUCHPAD_SPEED") "yes" }}
