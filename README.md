@@ -6,7 +6,7 @@
 
 **Reset zsh environment**
 ```shell
-$ INSTALL_GIT=yes chezmoi apply ~/.antigenrc --verbose && rm -rf ~/.antigen && zsh
+$ s373r-zsh-reset-env
 ```
 
 **Testing**
