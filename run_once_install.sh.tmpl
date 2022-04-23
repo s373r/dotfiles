@@ -6,9 +6,7 @@ set -euxo pipefail
 {{     fail "Only Linux is supported at the moment!" }}
 {{ end }}
 
-{{ if eq (env "INSTALL_PACKAGES") "yes" }}
-{{     template "install-packages.tmpl" . }}
-{{ end }}
+{{ template "install-packages.tmpl" . }}
 
 chsh -s $(which zsh)
 
