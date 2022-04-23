@@ -2,10 +2,12 @@
 {{     fail "Only Fedora is supported at the moment!" }}
 {{ end -}}
 
-sudo dnf install meson -y \
+sudo dnf install -y \
+{{- if eq (env "FIX_TOUCHPAD_SPEED") "yes" -}}
+    meson libinput-devel libudev-devel \
+{{- end -}}
     git \
-    zsh \
-    libinput-devel libudev-devel # fix-touchpad-speed.tmpl: dependencies for libinput-config
+    zsh
 
 {{ if eq (env "FIX_TOUCHPAD_SPEED") "yes" }}
 {{     template "fix-touchpad-speed.tmpl" . }}
