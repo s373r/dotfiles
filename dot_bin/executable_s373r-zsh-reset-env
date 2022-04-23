@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euxo pipefail
+
+chezmoi apply ~/.antigenrc --verbose
+rm -rf ~/.antigen
+zsh
