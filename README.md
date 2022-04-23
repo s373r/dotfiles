@@ -1,8 +1,14 @@
 # dotfiles
 
-[TODO](https://github.com/s373r/dotfiles/issues/5)
+[TODO: add more details](https://github.com/s373r/dotfiles/issues/5)
 
-### Useful commands
+### ✨ New machine setup
+
+```shell
+$ sh -c "$(curl -fsLS s373r.github.io/dotfiles)"
+```
+
+### 🔧 Useful commands
 
 **Reset zsh environment**
 ```shell
