@@ -9,3 +9,5 @@ set -euxo pipefail
 {{ if eq (env "INSTALL_PACKAGES") "yes" }}
 {{     template "install-packages.tmpl" . }}
 {{ end }}
+
+zsh
