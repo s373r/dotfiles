@@ -8,6 +8,10 @@ set -euxo pipefail
 
 {{ template "install-packages.tmpl" . }}
 
+{{ if .setup_gnome }}
+{{     template "setup-gnome.tmpl" . }}
+{{ end }}
+
 {{ if .fix_touchpad_speed }}
 {{     template "fix-touchpad-speed.tmpl" . }}
 {{ end }}

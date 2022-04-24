@@ -1,8 +1,3 @@
-{{ if .setup_gnome -}}
-#!/usr/bin/env bash
-
-set -euxo pipefail
-
 # NOTE: wayland: enable the experimental fractional scaling feature
 gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
 gsettings set org.gnome.mutter center-new-windows true
@@ -27,4 +22,3 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Open a terminal'
 
 gsettings set org.gnome.TextEditor highlight-current-line true
-{{ end -}}
