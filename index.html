@@ -1,1 +1,3 @@
-sh -c "$(curl -fsLS git.io/chezmoi)" -- init --apply s373r --purge-binary
+# NOTE: store chezmoi in ~/.local/bin
+BINDIR=~/.local/bin \
+    sh -c "$(curl -fsLS git.io/chezmoi)" -- init --apply s373r
