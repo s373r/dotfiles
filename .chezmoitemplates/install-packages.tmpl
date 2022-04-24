@@ -3,7 +3,7 @@
 {{ end -}}
 
 sudo dnf install -y \
-{{- if eq (env "FIX_TOUCHPAD_SPEED") "yes" -}}
+{{- if .fix_touchpad_speed -}}
     meson libinput-devel libudev-devel \
 {{- end -}}
     util-linux-user `# for "chsh" command` \

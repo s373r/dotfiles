@@ -1,0 +1,6 @@
+{{- writeToStdout "\n" -}}
+{{- writeToStdout "\033[1m  Initial configuration:\033[0m\n" -}}
+{{- $fix_touchpad_speed := promptBool "> Fix touchpad speed (y/n)" false -}}
+
+data:
+    fix_touchpad_speed: {{ $fix_touchpad_speed }}

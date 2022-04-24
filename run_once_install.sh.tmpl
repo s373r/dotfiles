@@ -8,7 +8,7 @@ set -euxo pipefail
 
 {{ template "install-packages.tmpl" . }}
 
-{{ if eq (env "FIX_TOUCHPAD_SPEED") "yes" }}
+{{ if .fix_touchpad_speed }}
 {{     template "fix-touchpad-speed.tmpl" . }}
 {{ end }}
 
