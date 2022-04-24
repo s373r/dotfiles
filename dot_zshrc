@@ -18,7 +18,7 @@
 #bindkey -e
 ## End of lines configured by zsh-newuser-install
 
-export PATH="${HOME}/.bin:${PATH}"
+export PATH="${HOME}/.local/bin:${PATH}"
 
 # TODO: Use "source ~/antigen.zsh" (starts from a dot) when
 # https://github.com/zsh-users/antigen/issues/650 will be fixed

@@ -8,3 +8,23 @@ sudo dnf install -y \
 {{- end -}}
     util-linux-user `# for "chsh" command` \
     zsh
+
+{{ if .install_gui_applications }}
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub -y \
+    com.mattjakeman.ExtensionManager \
+    org.telegram.desktop
+{{ end }}
+
+{{ if .setup_gnome -}}
+function install_and_enable_gnome_extension() {
+  local extension_id=$1
+  local extension_guid=$2
+
+  gnome-shell-extension-installer "${extension_id}"
+  gnome-extensions enable "${extension_guid}"
+}
+
+# https://extensions.gnome.org//extension/2890/tray-icons-reloaded/
+install_and_enable_gnome_extension 2890 trayIconsReloaded@selfmade.pl
+{{ end }}
