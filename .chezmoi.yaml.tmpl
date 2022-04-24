@@ -1,8 +1,10 @@
 {{- writeToStdout "\n" -}}
 {{- writeToStdout "  \033[1mInitial configuration:\033[0m\n" -}}
-{{- $install_git_config := promptBool "> Install git config (y/n)" false -}}
-{{- $fix_touchpad_speed := promptBool "> Fix touchpad speed (y/n)" false -}}
+{{- $install_git_config := promptBool "> Install git config   (y/n)" false -}}
+{{- $setup_gnome        := promptBool "> Apply GNOME settings (y/n)" false -}}
+{{- $fix_touchpad_speed := promptBool "> Fix touchpad speed   (y/n)" false -}}
 
 data:
     install_git_config: {{ $install_git_config }}
+    setup_gnome: {{ $setup_gnome }}
     fix_touchpad_speed: {{ $fix_touchpad_speed }}

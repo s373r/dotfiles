@@ -1,4 +1,4 @@
-{{ if eq (env "SETUP_GNOME") "yes" -}}
+{{ if .setup_gnome -}}
 #!/usr/bin/env bash
 
 set -euxo pipefail
