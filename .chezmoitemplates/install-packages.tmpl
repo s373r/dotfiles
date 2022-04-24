@@ -9,10 +9,12 @@ sudo dnf install -y \
     util-linux-user `# for "chsh" command` \
     zsh
 
+{{ if .install_gui_applications }}
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub -y \
     com.mattjakeman.ExtensionManager \
     org.telegram.desktop
+{{ end }}
 
 {{ if .setup_gnome -}}
 function install_and_enable_gnome_extension() {
