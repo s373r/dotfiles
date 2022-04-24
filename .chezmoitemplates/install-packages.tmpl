@@ -11,7 +11,6 @@ sudo dnf install -y \
 
 {{ if .install_gui_applications }}
 flatpak remote-add \
-    --user \
     --if-not-exists \
     flathub https://flathub.org/repo/flathub.flatpakrepo
 
