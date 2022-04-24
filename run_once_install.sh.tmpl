@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # NOTE: for gnome-shell-extension-installer
-PATH="${HOME}/.local/bin:${PATH}"
+export PATH="${HOME}/.local/bin:${PATH}"
 
 if [[ -n "${DEBUG:-}" ]]; then
   set -x
