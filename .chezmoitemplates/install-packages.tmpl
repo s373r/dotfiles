@@ -10,4 +10,6 @@ sudo dnf install -y \
     zsh
 
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub com.mattjakeman.ExtensionManager
+flatpak install flathub -y \
+    com.mattjakeman.ExtensionManager \
+    org.telegram.desktop
