@@ -26,6 +26,9 @@ fi
 {{     template "fix-touchpad-speed.tmpl" . }}
 {{ end }}
 
+mkdir -p ~/src
+ln -s ~/.local/share/chezmoi ~/src/dotfiles
+
 chsh -s $(which zsh)
 
 zsh
