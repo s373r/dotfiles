@@ -6,8 +6,17 @@ set -euxo pipefail
 {{     fail "Only Linux is supported at the moment!" }}
 {{ end }}
 
-{{ if eq (env "INSTALL_PACKAGES") "yes" }}
-{{     template "install-packages.tmpl" . }}
+# Install packages
+{{ template "install-packages.tmpl" . }}
+
+{{ if .setup_gnome }}
+# Setup GNOME
+{{     template "setup-gnome.tmpl" . }}
+{{ end }}
+
+{{ if .fix_touchpad_speed }}
+# Fix touchpad speed
+{{     template "fix-touchpad-speed.tmpl" . }}
 {{ end }}
 
 chsh -s $(which zsh)
