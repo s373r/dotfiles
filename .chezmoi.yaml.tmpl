@@ -1,3 +1,5 @@
+{{- $verbose := ne (env "DEBUG") "" -}}
+
 {{- writeToStdout "\n" -}}
 {{- writeToStdout "  \033[1mInitial configuration:\033[0m\n" -}}
 {{- writeToStdout "\n" -}}
@@ -6,6 +8,8 @@
 {{- $install_gui_applications := promptBool "• Install GUI applications \033[90m(y/n)\033[0m" false -}}
 {{- $fix_touchpad_speed       := promptBool "• Fix touchpad speed       \033[90m(y/n)\033[0m" false -}}
 {{- writeToStdout "\n" -}}
+
+verbose: {{ $verbose }}
 
 data:
     install_git_config: {{ $install_git_config }}
