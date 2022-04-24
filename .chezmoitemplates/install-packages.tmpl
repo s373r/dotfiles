@@ -8,3 +8,6 @@ sudo dnf install -y \
 {{- end -}}
     util-linux-user `# for "chsh" command` \
     zsh
+
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub com.mattjakeman.ExtensionManager
