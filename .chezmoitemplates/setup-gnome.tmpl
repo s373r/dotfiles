@@ -1,5 +1,8 @@
 # https://extensions.gnome.org//extension/2890/tray-icons-reloaded/
 gnome-shell-extension-installer 2890
+export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/trayIconsReloaded@selfmade.pl/schemas
+gsettings set org.gnome.shell.extensions.trayIconsReloaded icon-size 32
+gsettings set org.gnome.shell.extensions.trayIconsReloaded icon-padding-horizontal 4
 
 gsettings set org.gnome.shell enabled-extensions \
     "[
