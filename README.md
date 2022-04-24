@@ -21,5 +21,5 @@ $ s373r-zsh-reset-env
 
 2. Install
 ```shell
-$ INSTALL_PACKAGES=yes sh -c "$(curl -fsLS git.io/chezmoi)" -- init --apply s373r --verbose
+$ DEBUG=1 sh -c "$(curl -fsLS s373r.github.io/dotfiles)"
 ```

@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
+set -euo pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -x
+fi
 
 {{ if ne .chezmoi.os "linux" }}
 {{     fail "Only Linux is supported at the moment!" }}
