@@ -1,4 +1,19 @@
-{{- $verbose := ne (env "DEBUG") "" -}}
+{{- writeToStdout "                                                         \n" -}}
+{{- writeToStdout "           .                                             \n" -}}
+{{- writeToStdout "          ;WL                      L        j.           \n" -}}
+{{- writeToStdout "         f#E#K:    :;;;;;;;;;;;;;. #K:      EW,          \n" -}}
+{{- writeToStdout "       .E#f :K#t    jWWWWWWWW###L  :K#t     E##j         \n" -}}
+{{- writeToStdout "      iWW;    L#G.          ,W#f     L#G.   E###D.       \n" -}}
+{{- writeToStdout "     L##Lffi   t#W,        ,##f       t#W,  E#jG#W;      \n" -}}
+{{- writeToStdout "    tLLG##L .jffD##f      i##j     .jffD##f E#t t##f     \n" -}}
+{{- writeToStdout "      ,W#i .fLLLD##L     i##t     .fLLLD##L E#t  :K#E:   \n" -}}
+{{- writeToStdout "     j#E.      ;W#i     t##t          ;W#i  E#KDDDD###i  \n" -}}
+{{- writeToStdout "   .D#j       j#E.     t##i          j#E.   E#f,t#Wi,,,  \n" -}}
+{{- writeToStdout "  ,WK,      .D#f      j##;         .D#f     E#t  ;#W:    \n" -}}
+{{- writeToStdout "  EG.       KW,      :##,          KW,      DWi   ,KK:   \n" -}}
+{{- writeToStdout "  ,         G.       ,W,           G.                    \n" -}}
+{{- writeToStdout "                     ::                                  \n" -}}
+{{- writeToStdout "                                                         \n" -}}
 
 {{- writeToStdout "\n" -}}
 {{- writeToStdout "  \033[1mInitial configuration:\033[0m\n" -}}
@@ -8,6 +23,8 @@
 {{- $install_gui_applications := promptBool "• Install GUI applications \033[90m(y/n)\033[0m" false -}}
 {{- $fix_touchpad_speed       := promptBool "• Fix touchpad speed       \033[90m(y/n)\033[0m" false -}}
 {{- writeToStdout "\n" -}}
+
+{{- $verbose := ne (env "DEBUG") "" -}}
 
 verbose: {{ $verbose }}
 
