@@ -15,6 +15,9 @@ gnome-shell-extension-installer 517
 export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/caffeine@patapon.info/schemas
 gsettings set org.gnome.shell.extensions.caffeine restore-state true
 
+# https://extensions.gnome.org/extension/234/steal-my-focus/
+# NOTE: see .chezmoiexternal.yaml
+
 gsettings set org.fedorahosted.background-logo-extension logo-always-visible true
 
 gsettings set org.gnome.shell enabled-extensions \
@@ -22,6 +25,7 @@ gsettings set org.gnome.shell enabled-extensions \
         'trayIconsReloaded@selfmade.pl',
         'sound-output-device-chooser@kgshank.net',
         'caffeine@patapon.info',
+        'steal-my-focus@kagesenshi.org',
         'background-logo@fedorahosted.org'
     ]"
 

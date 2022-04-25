@@ -3,6 +3,11 @@
     type: file
     url: "https://github.com/brunelli/gnome-shell-extension-installer/raw/master/gnome-shell-extension-installer"
     executable: true
+
+".local/share/gnome-shell/extensions/steal-my-focus@kagesenshi.org":
+    type: archive
+    url: "https://github.com/s373r/gnome-shell-extension-stealmyfocus/archive/master.tar.gz"
+    stripComponents: 1
 {{ end }}
 
 ".antigen/antigen.zsh":
