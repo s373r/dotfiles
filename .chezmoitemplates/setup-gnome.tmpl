@@ -1,4 +1,4 @@
-# https://extensions.gnome.org//extension/2890/tray-icons-reloaded/
+# https://extensions.gnome.org/extension/2890/tray-icons-reloaded/
 gnome-shell-extension-installer 2890
 export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/trayIconsReloaded@selfmade.pl/schemas
 gsettings set org.gnome.shell.extensions.trayIconsReloaded icon-size 32
@@ -10,13 +10,19 @@ export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/sound-output-d
 gsettings set org.gnome.shell.extensions.sound-output-device-chooser hide-on-single-device true
 gsettings set org.gnome.shell.extensions.sound-output-device-chooser integrate-with-slider true
 
+# https://extensions.gnome.org/extension/517/caffeine/
+gnome-shell-extension-installer 517
+export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/caffeine@patapon.info/schemas
+gsettings set org.gnome.shell.extensions.caffeine restore-state true
+
 gsettings set org.fedorahosted.background-logo-extension logo-always-visible true
 
 gsettings set org.gnome.shell enabled-extensions \
     "[
+        'trayIconsReloaded@selfmade.pl',
         'sound-output-device-chooser@kgshank.net',
-        'background-logo@fedorahosted.org',
-        'trayIconsReloaded@selfmade.pl'
+        'caffeine@patapon.info',
+        'background-logo@fedorahosted.org'
     ]"
 
 # NOTE: wayland: enable the experimental fractional scaling feature
