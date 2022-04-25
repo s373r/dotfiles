@@ -4,10 +4,17 @@ export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/trayIconsReloa
 gsettings set org.gnome.shell.extensions.trayIconsReloaded icon-size 32
 gsettings set org.gnome.shell.extensions.trayIconsReloaded icon-padding-horizontal 4
 
+# https://extensions.gnome.org/extension/906/sound-output-device-chooser/
+gnome-shell-extension-installer 906
+export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/sound-output-device-chooser@kgshank.net/schemas
+gsettings set org.gnome.shell.extensions.sound-output-device-chooser hide-on-single-device true
+gsettings set org.gnome.shell.extensions.sound-output-device-chooser integrate-with-slider true
+
 gsettings set org.fedorahosted.background-logo-extension logo-always-visible true
 
 gsettings set org.gnome.shell enabled-extensions \
     "[
+        'sound-output-device-chooser@kgshank.net',
         'background-logo@fedorahosted.org',
         'trayIconsReloaded@selfmade.pl'
     ]"
