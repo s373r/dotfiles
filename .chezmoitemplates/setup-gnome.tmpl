@@ -1,15 +1,39 @@
-# https://extensions.gnome.org//extension/2890/tray-icons-reloaded/
+# https://extensions.gnome.org/extension/2890/tray-icons-reloaded/
 gnome-shell-extension-installer 2890
 export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/trayIconsReloaded@selfmade.pl/schemas
 gsettings set org.gnome.shell.extensions.trayIconsReloaded icon-size 32
 gsettings set org.gnome.shell.extensions.trayIconsReloaded icon-padding-horizontal 4
 
+# https://extensions.gnome.org/extension/906/sound-output-device-chooser/
+gnome-shell-extension-installer 906
+export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/sound-output-device-chooser@kgshank.net/schemas
+gsettings set org.gnome.shell.extensions.sound-output-device-chooser hide-on-single-device true
+gsettings set org.gnome.shell.extensions.sound-output-device-chooser integrate-with-slider true
+
+# https://extensions.gnome.org/extension/517/caffeine/
+gnome-shell-extension-installer 517
+export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/caffeine@patapon.info/schemas
+gsettings set org.gnome.shell.extensions.caffeine restore-state true
+
+# https://extensions.gnome.org/extension/234/steal-my-focus/
+# NOTE: see .chezmoiexternal.yaml
+
+# https://extensions.gnome.org/extension/352/middle-click-to-close-in-overview/
+# TODO https://github.com/p91paul/middleclickclose/issues/36
+
+# https://extensions.gnome.org/extension/277/impatience/
+gnome-shell-extension-installer 277
+
 gsettings set org.fedorahosted.background-logo-extension logo-always-visible true
 
 gsettings set org.gnome.shell enabled-extensions \
     "[
-        'background-logo@fedorahosted.org',
-        'trayIconsReloaded@selfmade.pl'
+        'trayIconsReloaded@selfmade.pl',
+        'sound-output-device-chooser@kgshank.net',
+        'caffeine@patapon.info',
+        'steal-my-focus@kagesenshi.org',
+        'impatience@gfxmonk.net',
+        'background-logo@fedorahosted.org'
     ]"
 
 # NOTE: wayland: enable the experimental fractional scaling feature
@@ -22,6 +46,7 @@ gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 gsettings set org.gnome.desktop.interface cursor-size 32
+gsettings set org.gnome.desktop.interface clock-show-weekday true
 
 gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false
 gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
@@ -30,6 +55,9 @@ gsettings set org.gnome.desktop.peripherals.touchpad speed 0.2
 
 gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'ru')]"
 gsettings set org.gnome.desktop.input-sources xkb-options "['grp:caps_toggle']"
+
+gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab']"
+gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Shift><Alt>Tab']"
 
 gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 3700
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
