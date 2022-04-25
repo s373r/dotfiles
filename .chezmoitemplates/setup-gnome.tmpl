@@ -56,6 +56,9 @@ gsettings set org.gnome.desktop.peripherals.touchpad speed 0.2
 gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'ru')]"
 gsettings set org.gnome.desktop.input-sources xkb-options "['grp:caps_toggle']"
 
+gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab']"
+gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Shift><Alt>Tab']"
+
 gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 3700
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
