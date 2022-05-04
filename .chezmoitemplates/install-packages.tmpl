@@ -8,6 +8,7 @@ sudo dnf install -y \
 {{- end -}}
     util-linux-user `# for "chsh" command` \
     dconf-editor \
+    jq \
     zsh
 
 {{ if .install_gui_applications }}
