@@ -1,20 +1,20 @@
-{{ if ne .chezmoi.osRelease.id "fedora" -}}
+{{- if ne .chezmoi.osRelease.id "fedora" -}}
 {{     fail "Only Fedora is supported at the moment!" }}
-{{ end -}}
+{{- end -}}
 
 sudo dnf install -y \
-{{- if .fix_touchpad_speed -}}
+{{- if .fix_touchpad_speed }}
     meson libinput-devel libudev-devel \
-{{- end -}}
+{{- end }}
     util-linux-user `# for "chsh" command` \
-{{ if .install_gui_applications }}
+{{- if .install_gui_applications }}
     dconf-editor \
     meld \
-{{ end }}
+{{- end }}
     jq \
     zsh
 
-{{ if .install_gui_applications }}
+{{ if .install_gui_applications -}}
 flatpak remote-add \
     --if-not-exists \
     flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -23,4 +23,4 @@ flatpak install flathub -y \
     com.mattjakeman.ExtensionManager \
     com.github.maoschanz.drawing \
     org.telegram.desktop
-{{ end }}
+{{- end -}}
