@@ -23,6 +23,16 @@ gsettings set org.gnome.shell.extensions.caffeine restore-state true
 # https://extensions.gnome.org/extension/352/middle-click-to-close-in-overview/
 # TODO https://github.com/p91paul/middleclickclose/issues/36
 
+# https://extensions.gnome.org/extension/16/auto-move-windows/
+gnome-shell-extension-installer 16
+export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/auto-move-windows@gnome-shell-extensions.gcampax.github.com/schemas
+gsettings set org.gnome.shell.extensions.auto-move-windows application-list \
+    "[
+        'org.gnome.Terminal.desktop:1',
+        'jetbrains-webstorm.desktop:2',
+        'firefox.desktop:3'
+    ]"
+
 # https://extensions.gnome.org/extension/3843/just-perfection/
 export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/just-perfection-desktop@just-perfection/schemas
 gnome-shell-extension-installer 3843
@@ -57,6 +67,7 @@ gsettings set org.gnome.shell enabled-extensions \
         'just-perfection-desktop@just-perfection',
         'workspaces-bar@fthx',
         'gnome-shell-go-to-last-workspace@github.com',
+        'auto-move-windows@gnome-shell-extensions.gcampax.github.com',
         'background-logo@fedorahosted.org'
     ]"
 
