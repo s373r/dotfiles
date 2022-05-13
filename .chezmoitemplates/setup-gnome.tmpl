@@ -1,3 +1,5 @@
+GNOME_VERSION=$(gnome-shell --version | sed  -nE "s/^GNOME Shell ([[:digit:]]+).*$/\1/p")
+
 # https://extensions.gnome.org/extension/2890/tray-icons-reloaded/
 gnome-shell-extension-installer 2890
 export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/trayIconsReloaded@selfmade.pl/schemas
@@ -27,6 +29,16 @@ gnome-shell-extension-installer 3843
 gsettings set org.gnome.shell.extensions.just-perfection animation 3
 gsettings set org.gnome.shell.extensions.just-perfection accessibility-menu false
 
+# https://extensions.gnome.org/extension/1089/go-to-last-workspace/
+# NOTE: see .chezmoiexternal.yaml
+pushd ~/.local/share/gnome-shell/extensions/gnome-shell-go-to-last-workspace@github.com
+
+jq --arg version "${GNOME_VERSION}" '.["shell-version"] = [$version]' metadata.json | sponge metadata.json
+export GSETTINGS_SCHEMA_DIR=./schemas
+gsettings set org.gnome.shell.extensions.go-to-last-workspace shortcut-key "['<Super>escape']"
+
+popd
+
 ### --> Tiling-like configuration (1/2)
 # https://extensions.gnome.org/extension/3851/workspaces-bar/
 gnome-shell-extension-installer 3851
@@ -44,6 +56,7 @@ gsettings set org.gnome.shell enabled-extensions \
         `# NOTE(DP): disabled: 'steal-my-focus@kagesenshi.org',`
         'just-perfection-desktop@just-perfection',
         'workspaces-bar@fthx',
+        'gnome-shell-go-to-last-workspace@github.com',
         'background-logo@fedorahosted.org'
     ]"
 
