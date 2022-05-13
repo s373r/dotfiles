@@ -27,9 +27,15 @@ gnome-shell-extension-installer 3843
 gsettings set org.gnome.shell.extensions.just-perfection animation 3
 gsettings set org.gnome.shell.extensions.just-perfection accessibility-menu false
 
+### --> Tiling-like configuration (1/2)
+# https://extensions.gnome.org/extension/3851/workspaces-bar/
+gnome-shell-extension-installer 3851
+### <-- Tiling-like configuration (1/2)
+
 # NOTE: fedora logo
 gsettings set org.fedorahosted.background-logo-extension logo-always-visible true
 
+# TODO: concat value from bash array
 gsettings set org.gnome.shell enabled-extensions \
     "[
         'trayIconsReloaded@selfmade.pl',
@@ -37,6 +43,7 @@ gsettings set org.gnome.shell enabled-extensions \
         'caffeine@patapon.info',
         `# NOTE(DP): disabled: 'steal-my-focus@kagesenshi.org',`
         'just-perfection-desktop@just-perfection',
+        'workspaces-bar@fthx',
         'background-logo@fedorahosted.org'
     ]"
 
