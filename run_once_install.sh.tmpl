@@ -28,6 +28,8 @@ fi
 
 chsh -s $(which zsh)
 
-# TODO: ask about reboot/logout
-
-zsh
+{{ if .setup_gnome }}
+    gnome-session-quit --no-prompt
+{{ else }}
+    zsh
+{{ end }}
