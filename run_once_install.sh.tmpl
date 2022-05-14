@@ -29,6 +29,8 @@ fi
 chsh -s $(which zsh)
 
 {{ if .setup_gnome }}
+    # TODO: add option to skip fonts installation
+    fc-cache -f
     gnome-session-quit --no-prompt
 {{ else }}
     zsh
