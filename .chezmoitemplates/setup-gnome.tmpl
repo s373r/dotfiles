@@ -40,6 +40,9 @@ export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/just-perfectio
 gnome-shell-extension-installer 3843
 gsettings set org.gnome.shell.extensions.just-perfection animation 3
 gsettings set org.gnome.shell.extensions.just-perfection accessibility-menu false
+### --> Tiling-like configuration (1/3)
+gsettings set org.gnome.shell.extensions.just-perfection workspace-popup false
+### <-- Tiling-like configuration (1/3)
 
 # https://extensions.gnome.org/extension/1089/go-to-last-workspace/
 # NOTE: see .chezmoiexternal.yaml
@@ -51,10 +54,10 @@ gsettings set org.gnome.shell.extensions.go-to-last-workspace shortcut-key "['<S
 
 popd
 
-### --> Tiling-like configuration (1/2)
+### --> Tiling-like configuration (2/3)
 # https://extensions.gnome.org/extension/3851/workspaces-bar/
 gnome-shell-extension-installer 3851
-### <-- Tiling-like configuration (1/2)
+### <-- Tiling-like configuration (2/3)
 
 # NOTE: fedora logo
 gsettings set org.fedorahosted.background-logo-extension logo-always-visible true
@@ -114,7 +117,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.shell.keybindings show-screenshot-ui "['Print', '<Shift><Super>s']"
 ### <-- Setup hotkeys
 
-### --> Tiling-like configuration (2/2)
+### --> Tiling-like configuration (3/3)
 gsettings set org.gnome.desktop.interface document-font-name 'Cantarell Nerd Font 11'
 gsettings set org.gnome.desktop.interface font-name 'Cantarell Nerd Font 11'
 gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Cantarell Nerd Font Bold 11'
@@ -152,4 +155,4 @@ gsettings set org.gnome.shell.keybindings switch-to-application-6 "[]"
 gsettings set org.gnome.shell.keybindings switch-to-application-7 "[]"
 gsettings set org.gnome.shell.keybindings switch-to-application-8 "[]"
 gsettings set org.gnome.shell.keybindings switch-to-application-9 "[]"
-### <-- Tiling-like configuration (2/2)
+### <-- Tiling-like configuration (3/3)
