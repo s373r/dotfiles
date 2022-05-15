@@ -28,6 +28,10 @@ fi
 
 chsh -s $(which zsh)
 
-# TODO: ask about reboot/logout
-
-zsh
+{{ if .setup_gnome }}
+    # TODO: add option to skip fonts installation
+    fc-cache -rf
+    gnome-session-quit
+{{ else }}
+    zsh
+{{ end }}

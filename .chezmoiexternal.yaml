@@ -9,6 +9,19 @@
     type: archive
     url: "https://github.com/s373r/gnome-shell-extension-stealmyfocus/archive/master.tar.gz"
     stripComponents: 1
+
+### --> Tiling-like configuration
+".local/share/gnome-shell/extensions/gnome-shell-go-to-last-workspace@github.com":
+    type: archive
+    url: "https://github.com/arjan/gnome-shell-go-to-last-workspace/archive/master.tar.gz"
+    stripComponents: 1
+
+".local/share/fonts/cantarell-nerd-fonts-complete":
+    type: archive
+    url: "https://github.com/s373r/cantarell-nerd-font/archive/main.tar.gz"
+    stripComponents: 1
+    include: ["*/*.otf"]
+### <-- Tiling-like configuration
 {{ end }}
 
 ".antigen/antigen.zsh":
