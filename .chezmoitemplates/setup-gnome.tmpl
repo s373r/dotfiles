@@ -135,7 +135,18 @@ gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Cantarell Nerd Fon
 gsettings set org.gnome.mutter dynamic-workspaces false
 
 gsettings set org.gnome.desktop.wm.preferences num-workspaces 9
-gsettings set org.gnome.desktop.wm.preferences workspace-names "['₁', '₂', '₃', '₄ﭮ', '₅', '6', '7', '8', '9']"
+gsettings set org.gnome.desktop.wm.preferences workspace-names \
+    "[
+        '₁',
+        '₂',
+        '₃',
+        '₄ﭮ',
+        '₅',
+        '6',
+        '7',
+        '8',
+        '₉'
+    ]"
 
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Super>1']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Super>2']"
