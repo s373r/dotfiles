@@ -11,5 +11,6 @@ antigen bundle popstas/zsh-command-time
 antigen bundle zdharma-continuum/fast-syntax-highlighting
 # NOTE: we specify main branch to be able clone repo
 antigen bundle zdharma-continuum/history-search-multi-word@main
+antigen bundle lukechilds/zsh-nvm
 
 antigen apply
