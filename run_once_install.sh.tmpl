@@ -26,6 +26,14 @@ fi
 {{     template "fix-touchpad-speed.tmpl" . }}
 {{ end }}
 
+# Install nvm
+# -----------
+export NVM_DIR=~/.local/share/nvm
+mkdir -p "${NVM_DIR}"
+# Set PROFILE to prevent updating .zshrc
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh \
+  | PROFILE=/dev/null bash
+
 chsh -s $(which zsh)
 
 {{ if .setup_gnome }}
