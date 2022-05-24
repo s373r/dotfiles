@@ -32,6 +32,9 @@ fi
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh \
   | PROFILE=/dev/null NVM_DIR=~/.local/share/nvm bash
 
+. ~/.local/share/nvm/nvm.sh
+nvm install node
+
 chsh -s $(which zsh)
 
 {{ if .setup_gnome }}
