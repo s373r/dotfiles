@@ -9,6 +9,10 @@ fi
 
 export PATH="${HOME}/.local/bin:${PATH}"
 
+# NOTE: should be before antigen
+export NVM_DIR=~/.local/share/nvm
+
+# TODO: move antigen to ~/.local/share
 source "${HOME}/.antigen/antigen.zsh"
 antigen init ~/.antigenrc
 
@@ -18,6 +22,11 @@ CARGO_HOME="${HOME}/.cargo"
 
 if [ -d "${CARGO_HOME}" ]; then
   source "${HOME}/.cargo/env"
+fi
+
+if [[ -d "${NVM_DIR}" ]]; then
+  source "${NVM_DIR}/nvm.sh"
+  source "${NVM_DIR}/bash_completion" # NOTE: load all kind of completions not only bash
 fi
 
 alias grfb='git checkout master && git pull --rebase && git checkout - && git rebase master'
