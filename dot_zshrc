@@ -33,3 +33,6 @@ alias grfb='git checkout master && git pull --rebase && git checkout - && git re
 alias gcfb='git checkout master && git pull --rebase && git checkout -b'
 alias code='flatpak run com.vscodium.codium'
 alias cat='bat --paging=never'
+
+# NOTE: should be after nvm
+export NODE_PATH="$(npm root -g):${NODE_PATH}"
