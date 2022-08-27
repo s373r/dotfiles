@@ -1,0 +1,19 @@
+[com/raggesilver/BlackBox]
+terminal-padding=(16, 16, 16, 16)
+fill-tabs=true
+hide-single-tab=true
+stealth-single-tab=true
+show-menu-button=true
+floating-controls=true
+delay-before-showing-floating-controls=300
+theme='Dracula'
+pixel-scrolling=true
+cursor-shape=1
+easy-copy-paste=true
+floating-controls-hover-area=30
+theme-dark='Dracula'
+remember-window-size=false
+headerbar-drag-area=false
+headerbar-draw-line-single-tab=false
+use-custom-scrollback=true
+scrollback-lines=1000000
