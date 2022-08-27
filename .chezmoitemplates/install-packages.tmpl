@@ -14,6 +14,7 @@ sudo dnf install -y \
 {{- end }}
     jq \
     htop \
+    podman podman-compose \
     zsh
 
 {{ if .install_gui_applications -}}
