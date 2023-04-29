@@ -9,7 +9,7 @@ fi
 
 export PATH="${HOME}/.local/bin:${PATH}"
 
-source ~/.antigen/antigen.zsh
+source "${HOME}/.antigen/antigen.zsh"
 antigen init ~/.antigenrc
 
 alias grfb='git checkout master && git pull --rebase && git checkout - && git rebase master'
