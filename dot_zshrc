@@ -12,6 +12,14 @@ export PATH="${HOME}/.local/bin:${PATH}"
 source "${HOME}/.antigen/antigen.zsh"
 antigen init ~/.antigenrc
 
+# TODO: move ~/.cargo to ~/.local/cargo
+#       check: https://github.com/rust-lang/rustup/issues/618#issuecomment-570951132
+CARGO_HOME="${HOME}/.cargo"
+
+if [ -d "${CARGO_HOME}" ]; then
+  source "${HOME}/.cargo/env"
+fi
+
 alias grfb='git checkout master && git pull --rebase && git checkout - && git rebase master'
 alias gcfb='git checkout master && git pull --rebase && git checkout -b'
 alias code='flatpak run com.vscodium.codium'
