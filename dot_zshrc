@@ -1,3 +1,12 @@
+# TODO: move ~/.fly to ~/.local/fly
+FLYCTL_INSTALL="${HOME}/.fly"
+
+if [ -d "${FLYCTL_INSTALL}" ]; then
+  export FLYCTL_INSTALL
+
+  export PATH="${FLYCTL_INSTALL}/bin:${PATH}"
+fi
+
 export PATH="${HOME}/.local/bin:${PATH}"
 
 source ~/.antigen/antigen.zsh
