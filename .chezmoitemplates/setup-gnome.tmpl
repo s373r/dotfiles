@@ -26,6 +26,13 @@ gnome-shell-extension-installer 1319
 # https://extensions.gnome.org/extension/5237/rounded-window-corners/
 gnome-shell-extension-installer 5237
 
+# https://extensions.gnome.org/extension/1460/vitals/
+gnome-shell-extension-installer 1460
+export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/Vitals@CoreCoding.com/schemas
+gsettings set org.gnome.shell.extensions.vitals hot-sensors "['_memory_usage_', '_processor_usage_', '_storage_free_']"
+gsettings set org.gnome.shell.extensions.vitals position-in-panel 1
+gsettings set org.gnome.shell.extensions.vitals show-battery true
+
 # https://extensions.gnome.org/extension/234/steal-my-focus/
 # NOTE: see .chezmoiexternal.yaml
 
@@ -86,6 +93,7 @@ gsettings set org.gnome.shell enabled-extensions \
         'caffeine@patapon.info',
         'gsconnect@andyholmes.github.io',
         'rounded-window-corners@yilozt',
+        'Vitals@CoreCoding.com',
         `# NOTE(DP): disabled: 'steal-my-focus@kagesenshi.org',`
         'just-perfection-desktop@just-perfection',
         'workspaces-bar@fthx',
