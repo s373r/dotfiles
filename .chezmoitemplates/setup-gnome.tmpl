@@ -1,8 +1,8 @@
-# https://extensions.gnome.org/extension/2890/tray-icons-reloaded/
-gnome-shell-extension-installer 2890
-export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/trayIconsReloaded@selfmade.pl/schemas
-gsettings set org.gnome.shell.extensions.trayIconsReloaded icon-size 32
-gsettings set org.gnome.shell.extensions.trayIconsReloaded icon-padding-horizontal 4
+# https://extensions.gnome.org/extension/615/appindicator-support/
+gnome-shell-extension-installer 615
+export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/appindicatorsupport@rgcjonas.gmail.com/schemas
+gsettings set org.gnome.shell.extensions.appindicator icon-size 32
+gsettings set org.gnome.shell.extensions.appindicator legacy-tray-enabled true
 
 # TODO 2023-04-32: Recheck this extension
 #      https://github.com/kgshank/gse-sound-output-device-chooser/issues/258 (what is the plan for gnome 43)
@@ -79,7 +79,7 @@ gsettings set org.fedorahosted.background-logo-extension logo-always-visible tru
 # TODO: concat value from bash array
 gsettings set org.gnome.shell enabled-extensions \
     "[
-        'trayIconsReloaded@selfmade.pl',
+        'appindicatorsupport@rgcjonas.gmail.com',
         `# NOTE(DP): disabled: 'sound-output-device-chooser@kgshank.net',`
         'caffeine@patapon.info',
         'gsconnect@andyholmes.github.io',
