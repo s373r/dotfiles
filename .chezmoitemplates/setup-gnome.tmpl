@@ -61,20 +61,13 @@ gsettings set org.gnome.shell.extensions.just-perfection accessibility-menu fals
 gsettings set org.gnome.shell.extensions.just-perfection workspace-popup false
 ### <-- Tiling-like configuration (1/3)
 
-# https://extensions.gnome.org/extension/1089/go-to-last-workspace/
-# NOTE: see .chezmoiexternal.yaml
-pushd ~/.local/share/gnome-shell/extensions/gnome-shell-go-to-last-workspace@github.com
-
-# TODO extract to bash function
-jq --arg version "${GNOME_VERSION}" '.["shell-version"] = [$version]' metadata.json | sponge metadata.json
-export GSETTINGS_SCHEMA_DIR=./schemas
-gsettings set org.gnome.shell.extensions.go-to-last-workspace shortcut-key "['<Super>escape']"
-
-popd
-
 ### --> Tiling-like configuration (2/3)
 # https://extensions.gnome.org/extension/5090/space-bar/
 gnome-shell-extension-installer 5090
+export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/space-bar@luchrioh/schemas
+gsettings set org.gnome.shell.extensions.space-bar.shortcuts enable-move-to-workspace-shortcuts true
+gsettings set org.gnome.shell.extensions.space-bar.shortcuts activate-previous-key "['<Super>Escape']"
+
 ### <-- Tiling-like configuration (2/3)
 
 # https://extensions.gnome.org/extension/1732/gtk-title-bar/
@@ -97,7 +90,6 @@ gsettings set org.gnome.shell enabled-extensions \
         `# NOTE(DP): disabled: 'steal-my-focus@kagesenshi.org',`
         'just-perfection-desktop@just-perfection',
         'space-bar@luchrioh',
-        'gnome-shell-go-to-last-workspace@github.com',
         'auto-move-windows@gnome-shell-extensions.gcampax.github.com',
         'background-logo@fedorahosted.org'
     ]"
@@ -168,26 +160,6 @@ gsettings set org.gnome.desktop.wm.preferences workspace-names \
         '8',
         '₉'
     ]"
-
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Super>1']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Super>2']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-3 "['<Super>3']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-4 "['<Super>4']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-5 "['<Super>5']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-6 "['<Super>6']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-7 "['<Super>7']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-8 "['<Super>8']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-9 "['<Super>9']"
-
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-1 "['<Shift><Super>1']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-2 "['<Shift><Super>2']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-3 "['<Shift><Super>3']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-4 "['<Shift><Super>4']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-5 "['<Shift><Super>5']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-6 "['<Shift><Super>6']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-7 "['<Shift><Super>7']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-8 "['<Shift><Super>8']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-9 "['<Shift><Super>9']"
 
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-left "['<Shift><Super>Left']"
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-right "['<Shift><Super>Right']"
