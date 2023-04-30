@@ -6,11 +6,14 @@ export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/trayIconsReloa
 gsettings set org.gnome.shell.extensions.trayIconsReloaded icon-size 32
 gsettings set org.gnome.shell.extensions.trayIconsReloaded icon-padding-horizontal 4
 
-# https://extensions.gnome.org/extension/906/sound-output-device-chooser/
-gnome-shell-extension-installer 906
-export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/sound-output-device-chooser@kgshank.net/schemas
-gsettings set org.gnome.shell.extensions.sound-output-device-chooser hide-on-single-device true
-gsettings set org.gnome.shell.extensions.sound-output-device-chooser integrate-with-slider true
+# TODO 2023-04-32: Recheck this extension
+#      https://github.com/kgshank/gse-sound-output-device-chooser/issues/258 (what is the plan for gnome 43)
+#
+# # https://extensions.gnome.org/extension/906/sound-output-device-chooser/
+# gnome-shell-extension-installer 906
+# export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/sound-output-device-chooser@kgshank.net/schemas
+# gsettings set org.gnome.shell.extensions.sound-output-device-chooser hide-on-single-device true
+# gsettings set org.gnome.shell.extensions.sound-output-device-chooser integrate-with-slider true
 
 # https://extensions.gnome.org/extension/517/caffeine/
 gnome-shell-extension-installer 517
@@ -79,7 +82,7 @@ gsettings set org.fedorahosted.background-logo-extension logo-always-visible tru
 gsettings set org.gnome.shell enabled-extensions \
     "[
         'trayIconsReloaded@selfmade.pl',
-        'sound-output-device-chooser@kgshank.net',
+        `# NOTE(DP): disabled: 'sound-output-device-chooser@kgshank.net',`
         'caffeine@patapon.info',
         'gsconnect@andyholmes.github.io',
         'rounded-window-corners@yilozt',
