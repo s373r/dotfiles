@@ -1,5 +1,3 @@
-GNOME_VERSION=$(gnome-shell --version | sed  -nE "s/^GNOME Shell ([[:digit:]]+).*$/\1/p")
-
 # https://extensions.gnome.org/extension/2890/tray-icons-reloaded/
 gnome-shell-extension-installer 2890
 export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/trayIconsReloaded@selfmade.pl/schemas
