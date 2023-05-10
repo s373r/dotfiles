@@ -1,5 +1,8 @@
 README.md
+
+{{ if not .install_gui_applications -}}
 .var/app/com.raggesilver.BlackBox/config/glib-2.0/settings/keyfile
+{{ end }}
 
 {{ if not .install_git_config }}
 .config/git/
