@@ -4,3 +4,7 @@ README.md
 {{ if not .install_git_config }}
 .config/git/
 {{ end }}
+
+{{ if not .setup_gnome }}
+.local/share/icons/
+{{ end }}
