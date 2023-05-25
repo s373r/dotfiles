@@ -35,4 +35,7 @@ flatpak install flathub -y \
     org.gnome.World.PikaBackup \
     com.github.marhkb.Pods \
     org.telegram.desktop
+
+flatpak --user override --filesystem=/home/$USER/.local/share/icons/:ro
+
 {{- end -}}
