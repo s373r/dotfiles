@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -x
+fi
+
+export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/space-bar@luchrioh/schemas
+gsettings set org.gnome.shell.extensions.space-bar.shortcuts activate-previous-key "[]"
+gsettings set org.gnome.shell.extensions.space-bar.shortcuts activate-previous-key "['<Super>Escape']"
