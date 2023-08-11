@@ -8,6 +8,10 @@
 $ sh -c "$(curl -fsLS s373r.github.io/dotfiles)"
 ```
 
+### 🚧 Optional: manual actions
+
+- Activate ThinkPad battery threshold (via GNOME Panel)
+
 ---
 
 ### 📝 Documentation
