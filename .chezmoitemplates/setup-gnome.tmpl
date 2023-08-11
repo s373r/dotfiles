@@ -59,18 +59,32 @@ gnome-shell-extension-installer 3956
 # https://extensions.gnome.org/extension/4798/thinkpad-battery-threshold/
 gnome-shell-extension-installer 4798
 
-### --> Tiling-like configuration (1/3)
+### --> Tiling-like configuration (1/4)
 gsettings set org.gnome.shell.extensions.just-perfection workspace-popup false
-### <-- Tiling-like configuration (1/3)
+### <-- Tiling-like configuration (1/4)
 
-### --> Tiling-like configuration (2/3)
+### --> Tiling-like configuration (2/4)
 # https://extensions.gnome.org/extension/5090/space-bar/
 gnome-shell-extension-installer 5090
 export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/space-bar@luchrioh/schemas
 gsettings set org.gnome.shell.extensions.space-bar.shortcuts enable-move-to-workspace-shortcuts true
 gsettings set org.gnome.shell.extensions.space-bar.shortcuts activate-previous-key "['<Super>Escape']"
+### <-- Tiling-like configuration (2/4)
 
-### <-- Tiling-like configuration (2/3)
+### --> Tiling-like configuration (3/4)
+pushd /tmp/
+git clone https://github.com/pop-os/launcher --depth 1
+pushd launcher
+just build-release
+sudo just rootdir=/ install
+popd
+popd
+rm -rf /tmp/launcher
+
+gsettings set org.gnome.shell.extensions.pop-shell active-hint true
+gsettings set org.gnome.shell.extensions.pop-shell fullscreen-launcher true
+gsettings set org.gnome.shell.extensions.pop-shell tile-by-default true
+### <-- Tiling-like configuration (3/4)
 
 # https://extensions.gnome.org/extension/1732/gtk-title-bar/
 gnome-shell-extension-installer 1732
@@ -94,6 +108,7 @@ gsettings set org.gnome.shell enabled-extensions \
         'middleclickclose@paolo.tranquilli.gmail.com',
         'auto-move-windows@gnome-shell-extensions.gcampax.github.com',
         'gnome-fuzzy-app-search@gnome-shell-extensions.Czarlie.gitlab.com',
+        'pop-shell@system76.com',
         'background-logo@fedorahosted.org'
     ]"
 
@@ -144,7 +159,7 @@ gsettings set org.freedesktop.ibus.panel.emoji hotkey "[]"
 
 ### <-- Setup hotkeys
 
-### --> Tiling-like configuration (3/3)
+### --> Tiling-like configuration (4/4)
 gsettings set org.gnome.desktop.interface document-font-name 'Cantarell Nerd Font 11'
 gsettings set org.gnome.desktop.interface font-name 'Cantarell Nerd Font 11'
 gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Cantarell Nerd Font Bold 11'
@@ -180,4 +195,4 @@ gsettings set org.gnome.shell.keybindings switch-to-application-6 "[]"
 gsettings set org.gnome.shell.keybindings switch-to-application-7 "[]"
 gsettings set org.gnome.shell.keybindings switch-to-application-8 "[]"
 gsettings set org.gnome.shell.keybindings switch-to-application-9 "[]"
-### <-- Tiling-like configuration (3/3)
+### <-- Tiling-like configuration (4/4)
