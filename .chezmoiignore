@@ -1,3 +1,4 @@
+docs/
 README.md
 
 {{ if not .install_gui_applications -}}
