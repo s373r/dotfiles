@@ -16,3 +16,7 @@
 ".antigen/antigen.zsh":
     type: file
     url: "https://git.io/antigen"
+
+".config/tmux/plugins/tpm":
+    type: git-repo
+    url: "https://github.com/tmux-plugins/tpm"
