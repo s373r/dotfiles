@@ -34,6 +34,11 @@ alias code='flatpak run com.vscodium.codium'
 alias cat='bat --paging=never'
 # NOTE: provided by zpm-zsh/clipboard plugin
 alias clipboard='clip'
+# NOTE: --->
+#       based on
+#       https://www.cyberciti.biz/tips/bash-aliases-mac-centos-linux-unix.html
+alias path='echo -e ${PATH//:/\\n}'
+#       <---
 
 # NOTE: should be after nvm
 export NODE_PATH="$(npm root -g):${NODE_PATH}"
