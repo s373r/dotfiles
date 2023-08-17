@@ -1,3 +1,7 @@
+if [[ -n "${DEBUG_ZSH_STARTUP_TIME:-}" ]]; then
+  zmodload zsh/zprof
+fi
+
 # TODO: move ~/.fly to ~/.local/fly
 FLYCTL_INSTALL="${HOME}/.fly"
 
@@ -31,3 +35,7 @@ alias cat='bat --paging=never'
 
 # NOTE: should be after nvm
 export NODE_PATH="$(npm root -g):${NODE_PATH}"
+
+if [[ -n "${DEBUG_ZSH_STARTUP_TIME:-}" ]]; then
+  zprof
+fi

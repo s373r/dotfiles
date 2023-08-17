@@ -2,6 +2,11 @@
 
 ### 🔧 Useful commands
 
+**Debug `zsh` startup time**
+```shell
+DEBUG_ZSH_STARTUP_TIME=1 /usr/bin/time zsh -i -c exit
+```
+
 **Reset zsh environment**
 ```shell
 $ s373r-zsh-reset-env
