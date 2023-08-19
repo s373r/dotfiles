@@ -58,7 +58,7 @@ FZF_PREVIEW_DIR="tree --dirsfirst -L 3 -C {}"
 FZF_PREVIEW_OPTS="--preview '([[ -f {} ]] && ${FZF_PREVIEW_FILE}) || ([[ -d {} ]] && ${FZF_PREVIEW_DIR})'"
 
 export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
-export FZF_DEFAULT_OPTS="--multi --cycle --info inline --layout reverse --height 100%"
+export FZF_DEFAULT_OPTS="--multi --cycle --info inline --layout reverse --height 80%"
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 export FZF_CTRL_T_OPTS="${FZF_PREVIEW_OPTS}"
 export FZF_ALT_C_OPTS="${FZF_PREVIEW_OPTS}"
