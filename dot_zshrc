@@ -1,3 +1,4 @@
+# TODO: styling: use " or '
 if [[ -n "${DEBUG_ZSH_STARTUP_TIME:-}" ]]; then
   zmodload zsh/zprof
 fi
@@ -31,6 +32,10 @@ if [ -d "${CARGO_HOME}" ]; then
   source "${HOME}/.cargo/env"
 fi
 
+if [ -x "$(command -v fzf)" ]; then
+  source /usr/share/fzf/shell/key-bindings.zsh
+fi
+
 alias grfb='git checkout master && git pull --rebase && git checkout - && git rebase master'
 alias gcfb='git checkout master && git pull --rebase && git checkout -b'
 alias code='flatpak run com.vscodium.codium'
@@ -45,6 +50,35 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # NOTE: should be after nvm
 export NODE_PATH="$(npm root -g):${NODE_PATH}"
+
+# TODO: fzf: extract to a file
+# NOTE: -->
+FZF_PREVIEW_FILE="bat --color=always --style=numbers {}"
+FZF_PREVIEW_DIR="tree --dirsfirst -L 3 -C {}"
+
+export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
+export FZF_DEFAULT_OPTS="--multi --cycle --info inline --layout reverse"
+export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
+export FZF_CTRL_T_OPTS="--preview '${FZF_PREVIEW_FILE}'"
+export FZF_ALT_C_OPTS="--preview '${FZF_PREVIEW_DIR}'"
+
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
+# TODO: Disable Ctrl-R fzf variant
+
+# TODO: Setup fuzzy completion
+#       https://github.com/junegunn/fzf#fuzzy-completion-for-bash-and-zsh
+
+# TODO: Setup ripgrep
+# https://github.com/junegunn/fzf/blob/master/ADVANCED.md#using-fzf-as-interactive-ripgrep-launcher
+
+#       <---
 
 if [[ -n "${DEBUG_ZSH_STARTUP_TIME:-}" ]]; then
   zprof
