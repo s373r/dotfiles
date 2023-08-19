@@ -92,6 +92,8 @@ gsettings set org.gnome.shell.extensions.pop-shell fullscreen-launcher true
 gsettings set org.gnome.shell.extensions.pop-shell tile-by-default true
 ### <-- Tiling-like configuration (3/4)
 
+# TODO: Stop working
+#       https://github.com/velitasali/gtktitlebar/issues/36
 # https://extensions.gnome.org/extension/1732/gtk-title-bar/
 gnome-shell-extension-installer 1732
 export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/gtktitlebar@velitasali.github.io/schemas
@@ -116,6 +118,7 @@ gsettings set org.gnome.shell enabled-extensions \
         'gnome-fuzzy-app-search@gnome-shell-extensions.Czarlie.gitlab.com',
         'thinkpad-battery-threshold@marcosdalvarez.org',
         'pop-shell@system76.com',
+        'gtktitlebar@velitasali.github.io',
         'background-logo@fedorahosted.org'
     ]"
 
