@@ -55,12 +55,13 @@ export NODE_PATH="$(npm root -g):${NODE_PATH}"
 # NOTE: -->
 FZF_PREVIEW_FILE="bat --color=always --style=numbers {}"
 FZF_PREVIEW_DIR="tree --dirsfirst -L 3 -C {}"
+FZF_PREVIEW_OPTS="--preview '([[ -f {} ]] && ${FZF_PREVIEW_FILE}) || ([[ -d {} ]] && ${FZF_PREVIEW_DIR})'"
 
 export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
-export FZF_DEFAULT_OPTS="--multi --cycle --info inline --layout reverse"
+export FZF_DEFAULT_OPTS="--multi --cycle --info inline --layout reverse --height 100%"
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
-export FZF_CTRL_T_OPTS="--preview '${FZF_PREVIEW_FILE}'"
-export FZF_ALT_C_OPTS="--preview '${FZF_PREVIEW_DIR}'"
+export FZF_CTRL_T_OPTS="${FZF_PREVIEW_OPTS}"
+export FZF_ALT_C_OPTS="${FZF_PREVIEW_OPTS}"
 
 _fzf_compgen_path() {
   fd --hidden --follow --exclude ".git" . "$1"
@@ -77,6 +78,9 @@ _fzf_compgen_dir() {
 
 # TODO: Setup ripgrep
 # https://github.com/junegunn/fzf/blob/master/ADVANCED.md#using-fzf-as-interactive-ripgrep-launcher
+
+# TODO: Setup key bindings
+#       https://betterprogramming.pub/boost-your-command-line-productivity-with-fuzzy-finder-985aa162ba5d
 
 #       <---
 

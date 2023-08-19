@@ -2,6 +2,7 @@ antigen use oh-my-zsh
 
 antigen theme robbyrussell
 
+antigen bundle Aloxaf/fzf-tab
 antigen bundle gitfast
 antigen bundle git-extras
 antigen bundle zsh-users/zsh-autosuggestions
