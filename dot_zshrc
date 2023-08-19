@@ -20,6 +20,9 @@ export NVM_DIR=~/.local/share/nvm
 source "${HOME}/.antigen/antigen.zsh"
 antigen init ~/.antigenrc
 
+# NOTE: Install theme for fast-syntax-highlighting
+fast-theme base16 &> /dev/null
+
 # TODO: move ~/.cargo to ~/.local/cargo
 #       check: https://github.com/rust-lang/rustup/issues/618#issuecomment-570951132
 CARGO_HOME="${HOME}/.cargo"
