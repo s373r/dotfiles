@@ -18,6 +18,7 @@
 {{- writeToStdout "\n" -}}
 {{- writeToStdout "  \033[1mInitial configuration:\033[0m\n" -}}
 {{- writeToStdout "\n" -}}
+{{- $setup_rust               := promptBool "• Install Rust toolchain   \033[90m(y/n)\033[0m" false -}}
 {{- $install_git_config       := promptBool "• Install git config       \033[90m(y/n)\033[0m" false -}}
 {{- $setup_gnome              := promptBool "• Apply GNOME settings     \033[90m(y/n)\033[0m" false -}}
 {{- $install_gui_applications := promptBool "• Install GUI applications \033[90m(y/n)\033[0m" false -}}
@@ -29,6 +30,7 @@
 verbose: {{ $verbose }}
 
 data:
+    setup_rust: {{ $setup_rust }}
     install_git_config: {{ $install_git_config }}
     install_gui_applications: {{ $install_gui_applications }}
     setup_gnome: {{ $setup_gnome }}

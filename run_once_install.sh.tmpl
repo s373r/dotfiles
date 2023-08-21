@@ -16,6 +16,12 @@ fi
 # Install packages
 {{ template "install-packages.tmpl" . }}
 
+{{ if .setup_rust }}
+  curl https://sh.rustup.rs -sSf \
+    | env CARGO_HOME="${HOME}/.local/share/cargo" RUSTUP_HOME="${HOME}/.local/share/rustup" \
+      sh -s -- -y --no-modify-path
+{{ end }}
+
 {{ if .setup_gnome }}
 # Setup GNOME
 {{     template "setup-gnome.tmpl" . }}

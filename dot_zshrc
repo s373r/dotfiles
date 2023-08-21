@@ -26,10 +26,10 @@ fast-theme base16 &> /dev/null
 
 # TODO: move ~/.cargo to ~/.local/cargo
 #       check: https://github.com/rust-lang/rustup/issues/618#issuecomment-570951132
-CARGO_HOME="${HOME}/.cargo"
+CARGO_HOME="${HOME}/.local/share/cargo"
 
 if [ -d "${CARGO_HOME}" ]; then
-  source "${HOME}/.cargo/env"
+  source "${CARGO_HOME}/env"
 fi
 
 if [ -x "$(command -v fzf)" ]; then
