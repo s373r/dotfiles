@@ -12,6 +12,14 @@ if [ -d "${FLYCTL_INSTALL}" ]; then
   export PATH="${FLYCTL_INSTALL}/bin:${PATH}"
 fi
 
+DENO_INSTALL="${HOME}/.local/share/deno"
+
+if [ -d "${DENO_INSTALL}" ]; then
+  export DENO_INSTALL
+
+  export PATH="${DENO_INSTALL}/bin:${PATH}"
+fi
+
 export PATH="${HOME}/.local/bin:${PATH}"
 
 # NOTE: should be before antigen

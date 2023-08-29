@@ -19,6 +19,7 @@
 {{- writeToStdout "  \033[1mInitial configuration:\033[0m\n" -}}
 {{- writeToStdout "\n" -}}
 {{- $setup_rust               := promptBool "• Install Rust toolchain   \033[90m(y/n)\033[0m" false -}}
+{{- $install_deno             := promptBool "• Install Deno             \033[90m(y/n)\033[0m" false -}}
 {{- $install_git_config       := promptBool "• Install git config       \033[90m(y/n)\033[0m" false -}}
 {{- $setup_gnome              := promptBool "• Apply GNOME settings     \033[90m(y/n)\033[0m" false -}}
 {{- $install_gui_applications := promptBool "• Install GUI applications \033[90m(y/n)\033[0m" false -}}

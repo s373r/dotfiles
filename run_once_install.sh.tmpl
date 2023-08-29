@@ -22,6 +22,12 @@ fi
       sh -s -- -y --no-modify-path
 {{ end }}
 
+{{ if .install_deno }}
+  curl -fsSL https://deno.land/x/install/install.sh \
+    | DENO_INSTALL=~/.local/share/deno sh
+{{ end }}
+
+
 {{ if .setup_gnome }}
 # Setup GNOME
 {{     template "setup-gnome.tmpl" . }}
