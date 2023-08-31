@@ -10,7 +10,14 @@ const backupDir = Deno.env.get("BACKUP_DIR") ?? `${home}/Downloads`;
 const outputDir = `${backupDir}/processed-simple-tab-group-backup`;
 
 type BackupFileContent = {
-  groups: Array<{ tabs: Array<{ favIconUrl?: string }> }>;
+  groups: Array<{
+    title: string;
+    tabs: Array<{
+      title: string;
+      url: string;
+      favIconUrl?: string;
+    }>;
+  }>;
 };
 
 class App {
@@ -73,14 +80,14 @@ class App {
       }
     }
 
-    await this.writeProcessedBackupFile(
+    await this.writeProcessedBackupFileAndSummaryFile(
       backupFileName,
       backupDirName,
       fileContent,
     );
   }
 
-  private async writeProcessedBackupFile(
+  private async writeProcessedBackupFileAndSummaryFile(
     backupFileName: string,
     backupDirName: string,
     fileContent: BackupFileContent,
@@ -89,10 +96,24 @@ class App {
 
     await Deno.mkdir(outputFileDir, { recursive: true });
 
-    const outputFilePath = `${outputFileDir}/${backupFileName}`;
-    const fileData = JSON.stringify(fileContent, null, 2);
+    const processedBackupFilePath = `${outputFileDir}/${backupFileName}`;
+    const processedBackupFileData = JSON.stringify(fileContent, null, 2);
 
-    await Deno.writeTextFile(outputFilePath, fileData);
+    await Deno.writeTextFile(processedBackupFilePath, processedBackupFileData);
+
+    const summaryFilePath = `${outputFileDir}/summary-${backupFileName}`;
+    const sortedFileContent = fileContent.groups.map((group) => ({
+      title: group.title,
+      tabs: group.tabs.map((tab) => ({ title: tab.title, url: tab.url })).sort((
+        tab_left,
+        tab_right,
+      ) => tab_left.url.localeCompare(tab_right.url)),
+    })).sort((group_left, group_right) =>
+      group_left.title.localeCompare(group_right.title)
+    );
+    const summaryFileData = JSON.stringify(sortedFileContent, null, 2);
+
+    await Deno.writeTextFile(summaryFilePath, summaryFileData);
   }
 }
 
