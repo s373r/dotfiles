@@ -1,5 +1,8 @@
 #!/usr/bin/env -S deno run --allow-env --allow-read --allow-write
 
+// A script to generate human-readable summary for the simple tab group Firefox extension backup files.
+// This was needed to recover lost tabs.
+
 import { walk } from "https://deno.land/std@0.200.0/fs/walk.ts";
 import { basename, dirname } from "https://deno.land/std@0.200.0/path/mod.ts";
 
