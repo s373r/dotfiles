@@ -27,7 +27,6 @@ fi
     | DENO_INSTALL=~/.local/share/deno sh
 {{ end }}
 
-
 {{ if .setup_gnome }}
 # Setup GNOME
 {{     template "setup-gnome.tmpl" . }}
@@ -37,6 +36,8 @@ fi
 # Fix touchpad speed
 {{     template "fix-touchpad-speed.tmpl" . }}
 {{ end }}
+
+sudo -v; curl https://rclone.org/install.sh | sudo bash || true
 
 # Install nvm
 # -----------
