@@ -20,3 +20,7 @@
 ".config/tmux/plugins/tpm":
     type: git-repo
     url: "https://github.com/tmux-plugins/tpm"
+
+".local/share/fonts/JetBrainsMono-nerd-fonts":
+    type: archive
+    url: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
