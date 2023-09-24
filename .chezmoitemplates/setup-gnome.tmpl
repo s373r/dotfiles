@@ -99,6 +99,11 @@ gnome-shell-extension-installer 1732
 export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/gtktitlebar@velitasali.github.io/schemas
 gsettings set org.gnome.shell.extensions.gtktitlebar restrict-to-primary-screen false
 
+# https://extensions.gnome.org/extension/5278/pano/
+gnome-shell-extension-installer 5278
+export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/pano@elhan.io/schemas
+gsettings set org.gnome.shell.extensions.pano play-audio-on-copy false
+
 # NOTE: fedora logo
 gsettings set org.fedorahosted.background-logo-extension logo-always-visible true
 
@@ -119,6 +124,7 @@ gsettings set org.gnome.shell enabled-extensions \
         'thinkpad-battery-threshold@marcosdalvarez.org',
         'pop-shell@system76.com',
         'gtktitlebar@velitasali.github.io',
+        'pano@elhan.io',
         'background-logo@fedorahosted.org'
     ]"
 
