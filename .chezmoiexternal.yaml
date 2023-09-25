@@ -28,17 +28,6 @@
 ".config/nvim":
     # NOTE: based on
     #       https://github.com/ritiek/dotfiles/blob/5c6069d74c0db21a5ea758a677b009c339ff95a2/chezmoi/.chezmoiexternal.toml#L19
-    #
-    # type: "git-repo"
-    # url: "https://github.com/NvChad/NvChad.git"
-    # refreshPeriod: "168h"
-    # clone.args: ["--depth", "1"]
-    #
-    # Ideally, we should be treating this a git-repo and not an archive.
-    # However, due to a bug in chezmoi, this seems like the best workaround
-    # for now:
-    # https://github.com/twpayne/chezmoi/issues/1614#issuecomment-1058933765
     type: "archive"
-    url: "https://github.com/NvChad/NvChad/archive/master.tar.gz"
+    url: "https://github.com/NvChad/NvChad/archive/refs/heads/v2.0.zip"
     stripComponents: 1
-    exact: false
