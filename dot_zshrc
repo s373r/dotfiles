@@ -32,12 +32,18 @@ antigen init ~/.antigenrc
 # NOTE: Install theme for fast-syntax-highlighting
 fast-theme base16 &> /dev/null
 
-# TODO: move ~/.cargo to ~/.local/cargo
-#       check: https://github.com/rust-lang/rustup/issues/618#issuecomment-570951132
 CARGO_HOME="${HOME}/.local/share/cargo"
 
 if [ -d "${CARGO_HOME}" ]; then
+  export CARGO_HOME
+
   source "${CARGO_HOME}/env"
+fi
+
+RUSTUP_HOME="${HOME}/.local/share/rustup"
+
+if [ -d "${RUSTUP_HOME}" ]; then
+  export RUSTUP_HOME
 fi
 
 if [ -x "$(command -v fzf)" ]; then
