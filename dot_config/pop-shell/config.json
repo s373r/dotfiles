@@ -1,0 +1,19 @@
+{
+  "float": [
+    {
+      "class": "org.gnome.Calculator",
+      "title": "Calculator"
+    },
+    {
+      "class": "pop-shell-exceptions"
+    },
+    {
+      "class": "dconf-editor"
+    },
+    {
+      "class": "org.gnome.Nautilus"
+    }
+  ],
+  "skiptaskbarhidden": [],
+  "log_on_focus": false
+}
