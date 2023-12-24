@@ -1,3 +1,6 @@
+# https://extensions.gnome.org/extension/18/native-window-placement/
+gnome-shell-extension-installer 18
+
 # https://extensions.gnome.org/extension/615/appindicator-support/
 gnome-shell-extension-installer 615
 export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/appindicatorsupport@rgcjonas.gmail.com/schemas
@@ -113,6 +116,7 @@ gsettings set org.fedorahosted.background-logo-extension logo-always-visible tru
 # TODO: concat value from bash array
 gsettings set org.gnome.shell enabled-extensions \
     "[
+        'native-window-placement@gnome-shell-extensions.gcampax.github.com',
         'appindicatorsupport@rgcjonas.gmail.com',
         `# NOTE(DP): disabled: 'sound-output-device-chooser@kgshank.net',`
         'caffeine@patapon.info',
