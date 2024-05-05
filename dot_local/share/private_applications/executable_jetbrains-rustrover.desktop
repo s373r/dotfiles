@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=RustRover
+Exec="/home/s373r/.local/bin/rustrover" %u
+Version=1.0
+Type=Application
+Categories=Development;IDE;
+Terminal=false
+Icon=/home/s373r/.local/share/JetBrains/Toolbox/apps/rustrover/bin/rustrover.svg
+Comment=A powerful IDE for Rust
+StartupWMClass=jetbrains-rustrover
+StartupNotify=true
