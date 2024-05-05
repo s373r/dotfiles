@@ -32,19 +32,9 @@ antigen init ~/.antigenrc
 # NOTE: Install theme for fast-syntax-highlighting
 fast-theme base16 &> /dev/null
 
-CARGO_HOME="${HOME}/.local/share/cargo"
-
-if [ -d "${CARGO_HOME}" ]; then
-  export CARGO_HOME
-
-  source "${CARGO_HOME}/env"
-fi
-
-RUSTUP_HOME="${HOME}/.local/share/rustup"
-
-if [ -d "${RUSTUP_HOME}" ]; then
-  export RUSTUP_HOME
-fi
+for ZSH_CONFIG_FILE in ~/.config/zsh/*; do
+    source "${ZSH_CONFIG_FILE}"
+done
 
 if [ -x "$(command -v fzf)" ]; then
   source /usr/share/fzf/shell/key-bindings.zsh
