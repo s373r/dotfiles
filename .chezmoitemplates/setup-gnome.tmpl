@@ -1,5 +1,7 @@
 # https://extensions.gnome.org/extension/18/native-window-placement/
 gnome-shell-extension-installer 18
+cd ~/.local/share/gnome-shell/extensions/native-window-placement@gnome-shell-extensions.gcampax.github.com
+glib-compile-schemas schemas
 
 # https://extensions.gnome.org/extension/615/appindicator-support/
 gnome-shell-extension-installer 615
@@ -75,6 +77,7 @@ export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/space-bar@luch
 gsettings set org.gnome.shell.extensions.space-bar.behavior toggle-overview false
 gsettings set org.gnome.shell.extensions.space-bar.shortcuts enable-move-to-workspace-shortcuts true
 gsettings set org.gnome.shell.extensions.space-bar.shortcuts activate-previous-key "['<Super>Escape']"
+gsettings set org.gnome.shell.extensions.space-bar.shortcuts open-menu "[]"
 ### <-- Tiling-like configuration (2/4)
 
 ### --> Tiling-like configuration (3/4)
