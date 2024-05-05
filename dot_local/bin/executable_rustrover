@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source "${HOME}/.config/zsh/rust.zsh"
+
+"${HOME}/.local/share/JetBrains/Toolbox/apps/rustrover/bin/rustrover.sh" "$@"
