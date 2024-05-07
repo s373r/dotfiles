@@ -40,9 +40,11 @@ gnome-shell-extension-installer 352
 # https://extensions.gnome.org/extension/16/auto-move-windows/
 gnome-shell-extension-installer 16
 export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/auto-move-windows@gnome-shell-extensions.gcampax.github.com/schemas
+# Our desktop files are used, since JetBrains Toolbox generates them with hashes
 gsettings set org.gnome.shell.extensions.auto-move-windows application-list \
     "[
         'jetbrains-webstorm.desktop:2',
+        'jetbrains-rustrover.desktop:2',
         'org.mozilla.firefox.desktop:3',
         'com.discordapp.Discord.desktop:4',
         'org.telegram.desktop.desktop:5',
