@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Since custom paths are used for CARGO_HOME & RUSTUP_HOME env vars,
+# we need to forward them to the IDE
 source "${HOME}/.config/zsh/rust.zsh"
 
 "${HOME}/.local/share/JetBrains/Toolbox/apps/rustrover/bin/rustrover.sh" "$@"
