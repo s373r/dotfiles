@@ -1,5 +1,6 @@
 # NOTE: based on
 #       https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/alacritty/alacritty.yml
+# TODO: hotkeys
 
 [font]
 size = 20.0
@@ -21,7 +22,6 @@ history = 10000
 multiplier = 3
 
 [window]
-decorations = "none"
 opacity = 0.85
 
 [window.padding]
