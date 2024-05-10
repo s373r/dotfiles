@@ -32,6 +32,7 @@ sudo dnf install -y \
     bat \
     fd-find \
     ripgrep \
+    adw-gtk3-theme \
     zsh
 
 {{ if .install_gui_applications -}}
@@ -53,6 +54,7 @@ flatpak install flathub -y \
     io.github.fabrialberio.pinapp \
     com.github.finefindus.eyedropper \
     com.discordapp.Discord \
+    org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark \
     org.telegram.desktop
 
 flatpak --user override --filesystem=/home/$USER/.local/share/icons/:ro
