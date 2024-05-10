@@ -15,6 +15,14 @@
         },
         {
             "class": "org.telegram.desktop"
+        },
+        {
+            "class": "jetbrains-webstorm",
+            "title": "splash"
+        },
+        {
+            "class": "jetbrains-rustrover",
+            "title": "splash"
         }
     ],
     "skiptaskbarhidden": [],
