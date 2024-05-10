@@ -12,6 +12,9 @@
     },
     {
       "class": "org.gnome.Nautilus"
+    },
+    {
+      "class": "org.telegram.desktop"
     }
   ],
   "skiptaskbarhidden": [],
