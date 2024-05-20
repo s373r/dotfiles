@@ -1,5 +1,9 @@
-if command -v rustrover &> /dev/null; then
-  export EDITOR="rustrover --edit --wait"
-else
-  export EDITOR="nano"
-fi
+editor() {
+  if command -v rustrover &> /dev/null; then
+    rustrover --edit --wait "$@"
+  else
+    nano "$@"
+  fi
+}
+
+export EDITOR=editor
