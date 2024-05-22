@@ -45,7 +45,6 @@ fi
 alias grfb='git checkout master && git pull --rebase && git checkout - && git rebase master'
 alias gcfb='git checkout master && git pull --rebase && git checkout -b'
 alias code='flatpak run com.vscodium.codium'
-alias cat='bat --paging=never'
 # NOTE: provided by zpm-zsh/clipboard plugin
 alias clipboard='clip'
 # NOTE: --->
