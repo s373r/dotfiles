@@ -27,3 +27,6 @@ opacity = 0.85
 [window.padding]
 x = 16
 y = 16
+
+[mouse]
+hide_when_typing = true
