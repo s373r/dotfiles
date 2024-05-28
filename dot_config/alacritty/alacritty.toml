@@ -30,3 +30,7 @@ y = 16
 
 [mouse]
 hide_when_typing = true
+
+bindings = [
+    { mouse = "Right", action = "Paste" },
+]
