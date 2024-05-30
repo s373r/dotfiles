@@ -35,5 +35,11 @@ bindings = [
     { mouse = "Right", action = "Paste" },
 ]
 
+[keyboard]
+bindings = [
+    { key = "С", mods = "Control|Shift", action = "Copy" },
+    { key = "М", mods = "Control|Shift", action = "Paste" }
+]
+
 [selection]
 save_to_clipboard = true
