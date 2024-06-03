@@ -4,6 +4,8 @@ set -euo pipefail
 
 curl -L https://fly.io/install.sh | FLYCTL_INSTALL="${HOME}/.local/share/fly" sh
 
+curl -fsSL https://bun.sh/install | BUN_INSTALL="${HOME}/.local/share/bun" bash
+
 # NOTE: for gnome-shell-extension-installer
 export PATH="${HOME}/.local/bin:${PATH}"
 
