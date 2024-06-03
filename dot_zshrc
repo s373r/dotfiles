@@ -24,7 +24,7 @@ antigen init ~/.antigenrc
 fast-theme base16 &> /dev/null
 
 for ZSH_CONFIG_FILE in ~/.config/zsh/*; do
-    source "${ZSH_CONFIG_FILE}"
+  source "${ZSH_CONFIG_FILE}"
 done
 
 if [ -x "$(command -v fzf)" ]; then
