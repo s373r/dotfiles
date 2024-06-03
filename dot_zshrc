@@ -3,15 +3,6 @@ if [[ -n "${DEBUG_ZSH_STARTUP_TIME:-}" ]]; then
   zmodload zsh/zprof
 fi
 
-# TODO: move ~/.fly to ~/.local/fly
-FLYCTL_INSTALL="${HOME}/.fly"
-
-if [ -d "${FLYCTL_INSTALL}" ]; then
-  export FLYCTL_INSTALL
-
-  export PATH="${FLYCTL_INSTALL}/bin:${PATH}"
-fi
-
 DENO_INSTALL="${HOME}/.local/share/deno"
 
 if [ -d "${DENO_INSTALL}" ]; then

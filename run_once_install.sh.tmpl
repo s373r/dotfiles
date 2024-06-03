@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+curl -L https://fly.io/install.sh | FLYCTL_INSTALL="${HOME}/.local/share/fly" sh
+
 # NOTE: for gnome-shell-extension-installer
 export PATH="${HOME}/.local/bin:${PATH}"
 
