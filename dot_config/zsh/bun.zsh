@@ -4,5 +4,6 @@ if [ -d "${BUN_INSTALL}" ]; then
   export BUN_INSTALL
   export PATH="${BUN_INSTALL}/bin:${PATH}"
 
-  source "${BUN_INSTALL}/_bun"
+  # Load completions
+  fpath+=("${BUN_INSTALL}")
 fi
