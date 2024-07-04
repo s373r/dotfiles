@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -x
+fi
+
+if [ $# -lt 1 ]; then
+  echo "Usage: $(basename "$0") <test-name> [crate]"
+  exit 1
+fi
+
+TEST_NAME="$1"
+
+if [ $# -gt 1 ]; then
+  CRATE="$2"
+
+  cargo nextest run -E "test($TEST_NAME)" --no-capture -p "$CRATE"
+else
+  cargo nextest run -E "test($TEST_NAME)" --no-capture
+fi
