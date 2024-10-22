@@ -11,12 +11,13 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
-TEST_NAME="$1"
-
 if [ $# -gt 1 ]; then
-  CRATE="$2"
+  CRATE="$1"
+  TEST_NAME="$2"
 
   cargo nextest run -E "test($TEST_NAME)" --no-capture -p "$CRATE"
 else
+  TEST_NAME="$1"
+
   cargo nextest run -E "test($TEST_NAME)" --no-capture
 fi
