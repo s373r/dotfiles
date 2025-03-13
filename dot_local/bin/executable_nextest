@@ -14,7 +14,7 @@ fi
 if [ $# -gt 1 ]; then
   # Remove "::mod" automatically so that
   # we can run tests just by copying the one that failed from the terminal.
-  CRATE="$1%mod"
+  CRATE="${1%::mod}"
   TEST_NAME="$2"
 
   cargo nextest run -E "test($TEST_NAME)" --no-capture -p "$CRATE"
