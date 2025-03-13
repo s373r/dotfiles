@@ -12,7 +12,9 @@ if [ $# -lt 1 ]; then
 fi
 
 if [ $# -gt 1 ]; then
-  CRATE="$1"
+  # Remove "::mod" automatically so that
+  # we can run tests just by copying the one that failed from the terminal.
+  CRATE="$1%mod"
   TEST_NAME="$2"
 
   cargo nextest run -E "test($TEST_NAME)" --no-capture -p "$CRATE"
