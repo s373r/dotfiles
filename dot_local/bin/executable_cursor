@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Based on: https://forum.cursor.com/t/how-to-open-cursor-from-terminal/3757/35
+(nohup "${HOME}/soft/Cursor.AppImage" --no-sandbox "$@" >/dev/null 2>&1 &)

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Cursor IDE
+Exec=sh -c "\\$HOME/.local/bin/cursor %u"
+Version=1.0
+Type=Application
+GenericName=Code Editor
+Icon=cursor
+Comment=AI-first code editor
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=cursor
+StartupNotify=true
