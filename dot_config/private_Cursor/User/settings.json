@@ -27,7 +27,14 @@
     "rust-analyzer.check.extraArgs": [
         "--",
         "-D",
-        "warnings"
+        "warnings",
+        "-A",
+        "dead_code",
+        "-A",
+        "unused_variables",
+        "-A",
+        "unused_imports",
+        "-A clippy::disallowed_macros"
     ],
     "rust-analyzer.restartServerOnConfigChange": true,
     "rust-analyzer.showSyntaxTree": true,
