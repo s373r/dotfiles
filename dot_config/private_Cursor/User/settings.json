@@ -34,7 +34,8 @@
         "unused_variables",
         "-A",
         "unused_imports",
-        "-A clippy::disallowed_macros"
+        "-A",
+        "clippy::disallowed_macros",
     ],
     "rust-analyzer.restartServerOnConfigChange": true,
     "rust-analyzer.showSyntaxTree": true,
