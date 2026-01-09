@@ -41,6 +41,7 @@ gnome-shell-extension-installer 352
 # https://extensions.gnome.org/extension/16/auto-move-windows/
 gnome-shell-extension-installer 16
 export GSETTINGS_SCHEMA_DIR=~/.local/share/gnome-shell/extensions/auto-move-windows@gnome-shell-extensions.gcampax.github.com/schemas
+glib-compile-schemas $GSETTINGS_SCHEMA_DIR
 # Our desktop files are used, since JetBrains Toolbox generates them with hashes
 gsettings set org.gnome.shell.extensions.auto-move-windows application-list \
     "[
